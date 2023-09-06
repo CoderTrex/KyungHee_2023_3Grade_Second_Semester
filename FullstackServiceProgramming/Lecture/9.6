@@ -1,0 +1,14 @@
+1. 네임드 방식에 대해서 알아보기~
+값이 여러개 들어올때 일부분만 지정해서 수정
+
+// Type.3 Named Parameters
+int getMaxNamed({var argv1, var argv2}) {
+  if (argv1 >= argv2) {
+    return argv1;
+  } else {
+    return argv2;
+  }
+}
+
+  tmp3 = getMaxNamed(argv1: tmp1, argv2: tmp2);
+  print("getMaxNamed(argv1: 3, argv2: 2) ==> $tmp3");
