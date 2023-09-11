@@ -1,0 +1,26 @@
+dart:core: Core functionality such as strings, numbers, collections, errors, dates, and URIs.
+dart:io: I/O for non-web apps.
+dart:html: DOM manipulation for web apps (available only to web apps).
+
+
+기본적으로 사용함.
+
+
+타입을 지정했기 때문에 에러 발생
+// Error : String element into an integer list
+List<int> intList = [1, 2, 3, 4, 5];
+intList[0] = "1";
+
+
+타입을 지정하지 않았기 때문에 에러 발생 X  
+// Non-Error : String element into a dynamic list
+iList = [1, 2, 3, 4, 5];
+iList[0] = "1";
+
+
+플러터 갤러리
+해당 사이트에서 하고 싶은 거 서비스 확인해보기
+-> 해당 서비스에서 구현 가능한거 확인해보기
+
+메테리얼 디자인
+-> 표준 화면 구성라인

@@ -1,3 +1,4 @@
 {
-    "cmake.configureOnOpen": false
+    "cmake.configureOnOpen": false,
+    "cmake.sourceDirectory": "C:/Coding/KyungHee_2023_3Grade_Second_Semester/FullstackServiceProgramming/DART-FLUTTER-BOOK/volume-I-chapter-07"
 }
