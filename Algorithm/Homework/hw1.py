@@ -25,7 +25,7 @@ def selection_sort(random_list):
 
 # 병합 정렬
 def merge_sort(arr):
-    if len(arr) < 2:
+    if len(arr) <= 1:
         return arr
 
     mid = len(arr) // 2
@@ -35,7 +35,7 @@ def merge_sort(arr):
     merged_arr = []
     low = 0
     high = 0
-    while low < len(low_arr) and high < len(high_arr):
+    while (low < len(low_arr) and high < len(high_arr)):
         if low_arr[low] < high_arr[high]:
             merged_arr.append(low_arr[low])
             low += 1
@@ -50,20 +50,20 @@ def merge_sort(arr):
 
 
 
-try_number = int(input("시도 횟수 직접 혹은 아래 번호를 입력하시오.\n1. 5000 2. 10000\n"))
-
-if (try_number == 1):
-    try_number = 5000
-elif (try_number == 2):
-    try_number = 10000
-
-random_list = []
-for i in range(0, try_number):
-    random_list.append(random.randint(1, 1000))
-print("this is random list\n",random_list)
-
 while (1):
-    sort_method = int(input("실행하고자 하는 정렬 방식을 입력하시오\n1. 선택정렬 2. 병합정렬 3. 종료\n"))
+    try_number = int(input("시도 횟수 직접 혹은 아래 번호를 입력하시오.\n1. 5000 2. 10000\n"))
+
+    if (try_number == 1):
+        try_number = 5000
+    elif (try_number == 2):
+        try_number = 10000
+
+    random_list = []
+    for i in range(0, try_number):
+        random_list.append(random.randint(1, 1000))
+    print("this is random list\n",random_list)
+
+    sort_method = int(input("실행하고자 하는 정렬 방식을 입력하시오\n1. 선택정렬 2. 병합정렬 3. 둘 다 4. 종료\n"))
     match sort_method:
         case 1:
             random_list, end = selection_sort(random_list)
@@ -80,7 +80,22 @@ while (1):
             print("time spend on merge sort: {0}".format(end))
         
         case 3:
+            random_list, end_selection = selection_sort(random_list)
+            print("selection sort list:\n", random_list)
+            print("\n")
+            
+            start = time.time()
+            merge_list = merge_sort(random_list)
+            end_merge = time.time() - start
+            print("merge sort list:\n", merge_list)
+            print("\n")
+            
+            print("n:                            {0}".format(try_number))
+            print("time spend on selection sort: {0}".format(end_selection))
+            print("time spend on merge sort:     {0}".format(end_merge))
+            
+        case 4:
             exit()
         
         case _:
-            print("wrong number plz input the 1~3 number")
+            print("wrong number.. plz input the number 1~4")

@@ -1,0 +1,48 @@
+2)
+n:                            5000
+time spend on selection sort: 0.3432884216308594
+time spend on merge sort:     0.0048372745513916016
+
+n:                            10000
+time spend on selection sort: 1.3620154857635498
+time spend on merge sort:     0.017416954040527344
+
+n:                            15000
+time spend on selection sort: 3.0176072120666504
+time spend on merge sort:     0.03241539001464844
+
+n:                            20000
+time spend on selection sort: 5.4923717975616455
+time spend on merge sort:     0.03473687171936035
+
+n:                            30000
+time spend on selection sort: 12.629246950149536
+time spend on merge sort:     0.050585031509399414
+
+
+n:                            40000
+time spend on selection sort: 22.650774717330933
+time spend on merge sort:     0.0777590274810791
+
+n:                            80000
+time spend on selection sort: X
+time spend on merge sort:     0.20976662635803223
+
+3)
+선택 정렬:
+    2/1 = 4.032532563
+    3/1 = 9.272469426
+    4/1 = 16.63033567
+    시간 복잡도: n^2
+
+병합 정렬:
+    2/1 = 1.994428626 (2)
+    3/1 = 2.904355801 (3)
+    4/1 = 4.464559492 (4)
+    8/1 = 12.0438181  (12)
+    시간 복잡도: NlogN
+
+
+4)
+50000000/1000 = 5000
+5000^2 = 25000000(초) = 0.79274479959년
