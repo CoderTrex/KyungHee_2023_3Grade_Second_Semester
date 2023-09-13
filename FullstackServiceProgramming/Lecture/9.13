@@ -1,0 +1,21 @@
+값을 설정하지 않으면 에러값이 뜬다.
+
+List iList = [];
+// 해당 리스트를 계속해서 실행
+iList
+..addAll([2, 1])
+..add(0)
+..sort((a, b) => a.compareTo(b));
+print("$iList");
+
+print("\n[3] forEach Method");
+
+// 리스트의 각각의 요소를 printStar로 입력값을 준다.
+iList.forEach(printStar);
+
+// int형을 가질 수도 있고, null값을 가질 수 있다.
+int? iNullableInt; // int or null
+
+// value값이 null일 수도 있기 때문에 !를 넣어서 null일때 에러를 처리
+print(map['key']!.length);
+
