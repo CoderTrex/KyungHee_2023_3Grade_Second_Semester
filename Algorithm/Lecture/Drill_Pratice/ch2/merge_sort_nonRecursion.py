@@ -1,15 +1,15 @@
-def mergeSort(a):
+def mergeSort(arru):
     width = 1   
-    array_len = len(a)                                         
+    array_len = len(arru)                                         
     while (width < array_len):
         left=0
         while (left < array_len):
             right = min(left+(width*2-1), array_len-1)        
             mid = min(left+width-1, array_len-1)
-            merge(a, left, mid, right)
+            merge(arru, left, mid, right)
             left += width*2
         width *= 2
-    return a
+    return arru
    
 def merge(array, left, mid, right):
     n1 = mid - left + 1
@@ -40,35 +40,12 @@ def merge(array, left, mid, right):
         array[k] = Right_array[j]
         j += 1
         k += 1
- 
 
+import random
+index = []
+for i in range(1, 20):
+    index.append(random.randint(1, 200))
 
-
-def merge_sort(array):
-    width = 1
-    array_len = len(array)
-    while (width < array_len):
-        left = 1
-        while (width < array_len):
-            right = min(left+width*2-1, array_len-1) # 움직여햐는 위치를 2번 가면 마지막 위치
-            mid = min(left+width-1, array_len-1) # 움직여야하는 위치에 대해서 중간 값
-            merge(array, left, mid, right)
-            left = right + 1
-        width*=2
-
-
-    return array
-
-
-def merge(array, left, mid, right):
-    left_array_len = mid - left + 1
-    right_array_len = right - mid
-    
-    left_array = [[0] for i in range(0, left_array_len)]
-    right_array = [[0] for i in range(0, right_array_len)]
-    for i in range(0, left_array_len):
-        left_array[i] = array[left+i]
-    
-    for i in range(0, right_array_len):
-        left_array[i] = array[right+i]
+array = mergeSort(index)
+print(array) 
     
