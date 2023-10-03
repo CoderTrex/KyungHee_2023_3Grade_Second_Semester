@@ -4,85 +4,86 @@ from utility import *
 ################################## 1. Floyd 알고리즘 ##################################
 ######################################################################################
 
-def allShortestPath(g,n):
+def printMatrix(d):
+    m = len(d)
+    n=len(d[0])
+    for i in range(0,m):
+        for j in range(0,n):
+            print(f'{d[i][j]:4d}',end=" ")
+        print()
+
+#print float matrix
+def printMatrixF(d):
+    n=len(d[0])
+    for i in range(0,n):
+        for j in range(0,n):
+            print(f'{d[i][j]:5.2f}',end=" ")
+            print()
+
+def print_inOrder(root):
+    if not root:
+        return
+    print_inOrder(root.l_child)
+    print(root.data)
+    print_inOrder(root.r_child)
+
+def print_preOrder(root):
+    if not root:
+        return
+    print(root.data)
+    print_preOrder(root.l_child)
+    print_preOrder(root.r_child)
+
+def allShortestPath(g, n):
     check_vertex = [[0 for j in range(len(g[0]))] for i in range(len(g))]
-
-    # 해당 배열은 이미 자신으로 이동하는 경우의 수를 0으로 초기화를 했음
-    # for i in range(n):
-    #     for j in range(n):
-    #         check_vertex[i][j] = 0
-    #         if (i == j):
-    #             g[i][j] = 0
-
+    path = [[[] for j in range(len(g[0]))] for i in range(len(g))]
+   
     for k in range(n):
         for a in range(n):
             for b in range(n):
-                # 최적화
-                if (a == b):
+                if a == b:
                     continue
-                # 알고리즘 2 : 최단 경로 경유 노드
-                if ((g[a][k]+g[k][b]) < g[a][b]):
+               
+                if (g[a][k] + g[k][b]) < g[a][b]:
                     check_vertex[a][b] = k + 1
+                    g[a][b] = g[a][k] + g[k][b]
+                   
+                    print(len(path[a][k]))
+                    if (len(path[a][k]) == 0):
+                        path[a][b].append([k+1])
+                    else:
+                        path[a][b] = path[a][k] + [[k + 1]]
+   
+    return g, check_vertex, path
 
-                # 알고리즘 1 : 최단 거리           
-                # 이는 직접 가는게 빠른지 아니면 경유가 빠른지 계산한다.
-                g[a][b] = min(g[a][b], g[a][k] + g[k][b])
-    return g, check_vertex
 
 inf=1000
 g=\
-[[  0,      1,    inf,      1,    5],
-[   9,      0,      3,      2,  inf],
-[   inf,    inf,    0,      4,  inf],
-[   inf,    inf,    2,      0,    3],
-[   3,      inf,  inf,    inf,    0]]
+[[  0,      4,    inf,    inf,    4],
+[   6,      0,    inf,    inf,  inf],
+[   1,      2,      0,      1,  inf],
+[ inf,    inf,      4,      0,  inf],
+[   9,    inf,      3,      5,    0]]
 
 
 print("\n1. floyd 알고리즘\n")
 printMatrix(g)
-d, p = allShortestPath(g, 5)
+d, p, path= allShortestPath(g, 5)
 print()
 printMatrix(d)
 print()
 printMatrix(p)
 print()
 
+print("V2 to V4 moving path is : {}".format(path[1][3]))
 
+# for i in range(len(path)):
+#     for j in range(len(path[i])):
+#         print("a(v{0}) to b(v{1}): path{2}".format(i+1, j+1, path[i][j]))
+print()
 ######################################################################################
 ############################ 2. 연쇄행렬 최소 곱셈 알고리즘 ############################
 ######################################################################################
-# void order(index i, index j) {
-#     if (i == j) 
-#         cout << “A” << i;
-#     else {
-#         k = P[i][j];
-#         cout << “(”;
-#         order(i,k);
-#         order(k+1,j);
-#         cout << “)”;
-#     }
-# }
-
-# int minmult(int n, const int d[], index P[][]) {
-#     index i, j, k, diagonal;
-#     int M[1..n][1..n];
-#     for(i=1; i <= n; i++)
-#         M[i][i] = 0;
-#     for(diagonal = 1; diagonal <= n-1; diagonal++)
-#         for(i=1; i <= n-diagonal; i++) {
-#             j = i + diagonal;
-#             M[i][j]= minimumi<=k<=j-1(M[i][k]+M[k+1][j]+d[i-1]*d[k]*d[j]); 
-#             P[i][j] = 최소치를 주는 k의 값
-#         }
-#     return M[1][n];
-# }
-
-
-def order(p,i,j):
-# 구현
-
-    return 0
-
 
 def order(p, i, j):
     if i == j:
