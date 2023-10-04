@@ -1,5 +1,12 @@
 import 'dart:io';
 
+
+/*
+curl
+python -m http.server 80 // 서버 잘 돌아가는 지 확인 할 수 있는 방법
+*/
+
+
 Future main() async {
   var ip = InternetAddress.loopbackIPv4;
   var port = 4040;
@@ -11,6 +18,8 @@ Future main() async {
 
   print('\$ server activated - ${server.address.address}:${server.port}.');
 
+  // 비동기 무한 루프
+  // 기다리고 처리되면 다시 처리
   await for (HttpRequest request in server) {
     try {
       print("\$ http request for ${request.uri.path} at (${DateTime.now()}).");
@@ -20,8 +29,8 @@ Future main() async {
         print("\$ send '200 ok'.");
 
         request.response
-          ..statusCode = HttpStatus.ok
-          ..write("Hello, World!");
+          ..statusCode = HttpStatus.ok // 답변을 200 ok를 보냄
+          ..write("Hello, World!");    // 클라이언트에게 보내는 정보 "Hello World!"
       } else if (request.uri.path.contains('/add')) {
         print("\$ http response is result of 'add' operation.");
         print("\$ send '200 ok'.");
