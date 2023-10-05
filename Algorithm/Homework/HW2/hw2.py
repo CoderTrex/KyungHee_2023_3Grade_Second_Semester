@@ -44,20 +44,19 @@ def allShortestPath(g, n):
     for k in range(n):
         for a in range(n):
             for b in range(n):
+                # 부분 최적화
                 if a == b:
                     continue
-               
                 if (g[a][k] + g[k][b]) < g[a][b]:
+                    
+                    # 알고리즘 2: 최고 인덱스 찾기
                     check_vertex[a][b] = k + 1
+                    
+                    # 알고리즘 1: 최적 경로 찾기
                     g[a][b] = g[a][k] + g[k][b]
-                   
-                    print(len(path[a][k]))
-                    if (len(path[a][k]) == 0):
-                        path[a][b].append([k+1])
-                    else:
-                        path[a][b] = path[a][k] + [[k + 1]]
-   
+                    
     return g, check_vertex, path
+
 
 
 inf=1000
@@ -78,12 +77,15 @@ print()
 printMatrix(p)
 print()
 
-print("V2 to V4 moving path is : {}".format(path[1][3]))
+def get_path(a, b):
+    if (p[a][b] != 0):
+        get_path(a, p[a][b] - 1)
+        print("V{} ".format(p[a][b]))
+        get_path(p[a][b] - 1, b)
 
-# for i in range(len(path)):
-#     for j in range(len(path[i])):
-#         print("a(v{0}) to b(v{1}): path{2}".format(i+1, j+1, path[i][j]))
+get_path(1, 3)
 print()
+
 ######################################################################################
 ############################ 2. 연쇄행렬 최소 곱셈 알고리즘 ############################
 ######################################################################################
