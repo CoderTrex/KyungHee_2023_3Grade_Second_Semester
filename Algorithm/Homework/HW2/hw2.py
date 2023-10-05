@@ -69,21 +69,27 @@ g=\
 
 
 print("\n1. floyd 알고리즘\n")
+print("original matrix")
 printMatrix(g)
 d, p, path= allShortestPath(g, 5)
 print()
+print("path weight calculated matrix")
 printMatrix(d)
 print()
+print("highest vertex in path matrix")
 printMatrix(p)
 print()
 
+
+print("V2 to V4 path: ", end = "")
 def get_path(a, b):
     if (p[a][b] != 0):
         get_path(a, p[a][b] - 1)
-        print("V{} ".format(p[a][b]))
+        print("V{} ".format(p[a][b]), end= " ")
         get_path(p[a][b] - 1, b)
 
 get_path(1, 3)
+print()
 print()
 
 ######################################################################################
@@ -119,6 +125,7 @@ for diagonal in range(1, n):
         m[i][j] = min_val
         p[i][j] = min_k
 
+print("\n2. 연쇄행렬 최소 곱셈 알고리즘\n")
 printMatrix(m)
 print()
 printMatrix(p)
