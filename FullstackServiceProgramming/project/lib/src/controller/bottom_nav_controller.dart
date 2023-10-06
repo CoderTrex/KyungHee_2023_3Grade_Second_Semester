@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../pages/upload.dart';
+import '../components/message_popup.dart';
+import 'dart:io';
 
 enum PageName { HOME, SEARCH, UPLOAD, ACTIVITY, MYPAGE }
 
@@ -9,7 +11,7 @@ class BottomNavcontroller extends GetxController {
   RxInt pageIndex = 0.obs;
   List<int> bottomHistory = [0];
 
-  void changeBottomNav(int value) {
+  void changeBottomNav(int value, {bool hasGesture = true}) {
     var page = PageName.values[value];
     switch (page) {
       case PageName.UPLOAD:
@@ -19,23 +21,39 @@ class BottomNavcontroller extends GetxController {
       case PageName.SEARCH:
       case PageName.ACTIVITY:
       case PageName.MYPAGE:
-        _changePage(value);
+        _changePage(value, hasGesture: hasGesture);
         break;
     }
     pageIndex(value);
   }
 
-  void _changePage(int value) {
+  void _changePage(int value, {bool hasGesture = true}) {
     pageIndex(value);
+    if (!hasGesture) return;
+    if (bottomHistory.contains(value)) {
+      bottomHistory.add(value);
+    }
   }
 
   Future<bool> willPopAction() async {
     if (bottomHistory.length == 1) {
-      print('exit');
-      return false;
-    } else {
-      print("goto befo page!");
+      showDialog(
+        context: Get.context!,
+        builder: (context) => MessagePopup(
+          message: '종료하시겠습니까?',
+          okCallback: () {
+            exit(0);
+          },
+          cancelCallback: Get.back,
+          title: '시스템',
+        ),
+      );
       return true;
+    } else {
+      bottomHistory.removeLast();
+      var index = bottomHistory.last;
+      changeBottomNav(index, hasGesture: false);
+      return false;
     }
   }
 }
