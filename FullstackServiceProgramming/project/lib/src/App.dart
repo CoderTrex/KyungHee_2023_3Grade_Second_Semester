@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:get/get_connect/http/src/utils/utils.dart';
 import 'package:project/src/components/image_dart.dart';
 import 'package:project/src/controller/bottom_nav_controller.dart';
+import 'package:project/src/pages/home.dart';
 
 // getx 영상을 봐야함
 class App extends GetView<BottomNavcontroller> {
@@ -14,10 +15,10 @@ class App extends GetView<BottomNavcontroller> {
       child: Obx(
         () => Scaffold(
           // backgroundColor: Colors.red,
-          appBar: AppBar(),
           body: IndexedStack(
             index: controller.pageIndex.value,
             children: [
+              const Home(),
               Container(child: Center(child: Text('HOME'))),
               Container(child: Center(child: Text('SEARCH'))),
               Container(child: Center(child: Text('UPLOAD'))),
