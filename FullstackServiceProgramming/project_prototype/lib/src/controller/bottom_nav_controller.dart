@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:project/src/pages/search.dart';
 import '../pages/upload.dart';
 import '../components/message_popup.dart';
+// import '../components/post_widget.dart';
+
 import 'dart:io';
 
 enum PageName { HOME, SEARCH, UPLOAD, ACTIVITY, MYPAGE }
@@ -17,8 +20,8 @@ class BottomNavcontroller extends GetxController {
       case PageName.UPLOAD:
         Get.to(() => const Upload());
         break;
-      case PageName.HOME:
       case PageName.SEARCH:
+      case PageName.HOME:
       case PageName.ACTIVITY:
       case PageName.MYPAGE:
         _changePage(value, hasGesture: hasGesture);

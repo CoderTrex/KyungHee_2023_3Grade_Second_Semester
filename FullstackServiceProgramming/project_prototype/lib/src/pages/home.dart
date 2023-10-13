@@ -114,7 +114,7 @@ class Home extends StatelessWidget {
 
   Widget _postList() {
     return Column(
-      children: List.generate(50, (index) => PostWidget()).toList(),
+      children: List.generate(1, (index) => PostWidget()).toList(),
     );
   }
 
@@ -127,18 +127,6 @@ class Home extends StatelessWidget {
           IconsPath.logo,
           width: 300,
         ),
-        // actions: [
-        //   GestureDetector(
-        //     onTap: () {},
-        //     child: Padding(
-        //       padding: const EdgeInsets.all(15.0),
-        //       child: ImageData(
-        //         IconsPath.directMessage,
-        //         width: 50,
-        //       ),
-        //     ),
-        //   )
-        // ],
       ),
       body: ListView(children: [
         _advertiseList(),

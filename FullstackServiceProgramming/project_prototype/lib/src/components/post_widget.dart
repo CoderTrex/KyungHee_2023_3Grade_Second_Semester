@@ -7,19 +7,6 @@ import 'package:project/src/components/image_dart.dart';
 class PostWidget extends StatelessWidget {
   const PostWidget({super.key});
 
-  Widget _title1() {
-    return const Padding(
-      padding: EdgeInsets.symmetric(horizontal: 15.0),
-      child: Text(
-        '네이버 웹툰',
-        style: TextStyle(
-          color: Colors.black,
-          fontSize: 14,
-        ),
-      ),
-    );
-  }
-
   Widget _content1(BuildContext context) {
     double size_w = 100, size_h = 130.0;
     List<String> imageUrls = [
@@ -30,58 +17,67 @@ class PostWidget extends StatelessWidget {
       'https://comicthumb-phinf.pstatic.net/20201221_57/pocket_1608530248666JkFfN_JPEG/__690x100.jpg',
     ];
 
-    return SingleChildScrollView(
-      scrollDirection: Axis.horizontal, // 가로 스크롤
-      child: Row(
-        children: [
-          for (String imageUrl in imageUrls)
-            Padding(
-              padding: EdgeInsets.only(left: 30.0), // 이미지 사이의 간격을 조절
-              child: Stack(
-                children: [
-                  Align(
-                    alignment: Alignment.centerLeft,
-                    child: Image(
-                      image: CachedNetworkImageProvider(imageUrl),
-                      width: size_w, // 원하는 폭 (픽셀) 설정
-                      height: size_h, // 원하는 높이 (픽셀) 설정
-                      fit: BoxFit.fill,
+    return Container(
+      color: Colors.green,
+      height: 150,
+      child: SingleChildScrollView(
+        scrollDirection: Axis.horizontal, // 가로 스크롤
+        child: Row(
+          children: [
+            for (String imageUrl in imageUrls)
+              Padding(
+                padding: EdgeInsets.only(left: 30.0), // 이미지 사이의 간격을 조절
+                child: Stack(
+                  children: [
+                    Align(
+                      alignment: Alignment.centerLeft,
+                      child: Image(
+                        image: CachedNetworkImageProvider(imageUrl),
+                        width: size_w, // 원하는 폭 (픽셀) 설정
+                        height: size_h, // 원하는 높이 (픽셀) 설정
+                        fit: BoxFit.fill,
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-            ),
-        ],
+          ],
+        ),
       ),
     );
   }
 
   Widget _content2(BuildContext context) {
-    double size_w = 142, size_h = 80;
+    double size_w = 180, size_h = 101;
     List<String> imageUrls = [
       'https://datasets-server.huggingface.co/assets/daspartho/mrbeast-thumbnails/--/default/train/5/image/image.jpg',
       'https://i.ytimg.com/vi/hnanNlDbsE4/maxresdefault.jpg',
       'https://i.ytimg.com/vi/R6-HrA0dhr4/maxresdefault.jpg',
     ];
 
-    return SingleChildScrollView(
-      scrollDirection: Axis.horizontal, // 가로 스크롤
-      child: Row(
-        children: [
-          for (String imageUrl in imageUrls)
-            Padding(
-              padding: EdgeInsets.only(left: 30.0), // 이미지 사이의 간격을 조절
-              child: Align(
-                alignment: Alignment.centerLeft,
-                child: Image(
-                  image: CachedNetworkImageProvider(imageUrl),
-                  width: size_w, // 원하는 폭 (픽셀) 설정
-                  height: size_h, // 원하는 높이 (픽셀) 설정
-                  fit: BoxFit.fill,
+    return Container(
+      // width: 500,
+      height: 150,
+      color: Colors.red,
+      child: SingleChildScrollView(
+        scrollDirection: Axis.horizontal, // 가로 스크롤
+        child: Row(
+          children: [
+            for (String imageUrl in imageUrls)
+              Padding(
+                padding: EdgeInsets.only(left: 30.0), // 이미지 사이의 간격을 조절
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: Image(
+                    image: CachedNetworkImageProvider(imageUrl),
+                    width: size_w, // 원하는 폭 (픽셀) 설정
+                    height: size_h, // 원하는 높이 (픽셀) 설정
+                    fit: BoxFit.fill,
+                  ),
                 ),
               ),
-            ),
-        ],
+          ],
+        ),
       ),
     );
   }
@@ -219,7 +215,7 @@ class PostWidget extends StatelessWidget {
         children: [
           const SizedBox(height: 20),
           _content1(context),
-          const SizedBox(height: 50),
+          const SizedBox(height: 20),
           _content2(context),
           const SizedBox(height: 55),
           _header(),
