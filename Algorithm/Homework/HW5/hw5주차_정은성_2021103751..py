@@ -40,7 +40,6 @@ def print_preOrder(root):
 
 def allShortestPath(g, n):
     check_vertex = [[0 for j in range(len(g[0]))] for i in range(len(g))]
-    path = [[[] for j in range(len(g[0]))] for i in range(len(g))]
    
     for k in range(n):
         for a in range(n):
@@ -56,7 +55,7 @@ def allShortestPath(g, n):
                     # 알고리즘 1: 최적 경로 찾기
                     g[a][b] = g[a][k] + g[k][b]
                     
-    return g, check_vertex, path
+    return g, check_vertex
 
 inf=1000
 g=\
@@ -69,7 +68,7 @@ g=\
 print("\n1. floyd 알고리즘\n")
 print("-----------------original matrix:--------------------")
 printMatrix(g)
-d, p, path= allShortestPath(g, 5)
+d, p = allShortestPath(g, 5)
 print()
 print("----------short cut path calculated matrix:----------")
 printMatrix(d)
@@ -84,7 +83,9 @@ def get_path(a, b):
         get_path(a, p[a][b] - 1)
         print("V{} ".format(p[a][b]), end= " ")
         get_path(p[a][b] - 1, b)
+
 get_path(1, 3)
+
 print("\n")
 
 ######################################################################################
