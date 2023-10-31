@@ -15,11 +15,18 @@ class App extends GetView<BottomNavcontroller> {
     return WillPopScope(
       child: Obx(
         () => Scaffold(
-          // backgroundColor: Colors.red,
           body: IndexedStack(
             index: controller.pageIndex.value,
             children: [
               const Home(),
+              Navigator(
+                key: controller.searchPageNavigationkey,
+                onGenerateRoute: (RouteSettings) {
+                  return MaterialPageRoute(
+                    builder: (context) => const Search(),
+                  );
+                },
+              ),
               const Search(),
               Container(child: Center(child: Text('HOME'))),
               Container(child: Center(child: Text('SEARCH'))),

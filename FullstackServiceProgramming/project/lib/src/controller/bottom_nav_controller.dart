@@ -8,7 +8,10 @@ enum PageName { HOME, SEARCH, UPLOAD, ACTIVITY, MYPAGE }
 
 // 페이지 인덱스 관리
 class BottomNavcontroller extends GetxController {
+  static BottomNavcontroller get to => Get.find();
   RxInt pageIndex = 0.obs;
+  GlobalKey<NavigatorState> searchPageNavigationkey =
+      GlobalKey<NavigatorState>();
   List<int> bottomHistory = [0];
 
   void changeBottomNav(int value, {bool hasGesture = true}) {
@@ -30,7 +33,7 @@ class BottomNavcontroller extends GetxController {
   void _changePage(int value, {bool hasGesture = true}) {
     pageIndex(value);
     if (!hasGesture) return;
-    if (bottomHistory.contains(value)) {
+    if (bottomHistory.last != value) {
       bottomHistory.add(value);
     }
   }
@@ -50,6 +53,11 @@ class BottomNavcontroller extends GetxController {
       );
       return true;
     } else {
+      var page = PageName.values[bottomHistory.last];
+      if (page == PageName.SEARCH) {
+        var value = await searchPageNavigationkey.currentState!.maybePop();
+        if (value) return false;
+      }
       bottomHistory.removeLast();
       var index = bottomHistory.last;
       changeBottomNav(index, hasGesture: false);
