@@ -6,30 +6,28 @@ class MyApp extends StatelessWidget {
   final Map info = {
     'appTitle': 'StatelessWidget Demo',
     'appBarTitle': 'Flutter Official Site',
-    'titleImageLink':
-      'https://storage.googleapis.com/cms-storage-bucket/'
-      '2f118a9971e4ca6ad737.png',
+    'titleImageLink': 'https://storage.googleapis.com/cms-storage-bucket/'
+        '2f118a9971e4ca6ad737.png',
     'titleSectionHeader': 'Flutter on Mobile',
     'titleSectionBody': 'https://flutter.dev/multi-platform/mobile',
     'titleSectionScore': 100,
     'textSection': 'Bring your app idea to more users from day one by'
-      ' building with Flutter '
-      'on iOS and Android simultaneously, without sacrificing features, '
-      'quality, or performance. All mobile on day one: '
-      'Reach your full addressable market from day one by targeting users'
-      ' in both ecosystems from a single codebase. Do more with less: '
-      'Unite your mobile development team resources towards building '
-      'one seamless customer experience. One experience: '
-      'Release simultaneously on iOS and Android with feature parity '
-      'for the best experience for all users.',
+        ' building with Flutter '
+        'on iOS and Android simultaneously, without sacrificing features, '
+        'quality, or performance. All mobile on day one: '
+        'Reach your full addressable market from day one by targeting users'
+        ' in both ecosystems from a single codebase. Do more with less: '
+        'Unite your mobile development team resources towards building '
+        'one seamless customer experience. One experience: '
+        'Release simultaneously on iOS and Android with feature parity '
+        'for the best experience for all users.',
   };
 
   @override
   Widget build(BuildContext context) {
     final titleImage = _buildTitleImage(info['titleImageLink']);
     Widget textSection = _buildTextSection(info['textSection']);
-    Widget buttonSection = 
-      _buildButtonSection(Theme.of(context).primaryColor);
+    Widget buttonSection = _buildButtonSection(Theme.of(context).primaryColor);
     Widget titleSection = _buildTitleSection(info['titleSectionHeader'],
         info['titleSectionBody'], info['titleSectionScore']);
 
@@ -100,12 +98,12 @@ Container _buildTitleSection(String name, String addr, int count) {
 
 Widget _buildButtonSection(Color color) {
   return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: [
-        _buildButtonColumn(color, Icons.assistant_navigation, 'Visit'),
-        _buildButtonColumn(color, Icons.add_alert_sharp, 'Alarm'),
-        _buildButtonColumn(color, Icons.share, 'Share'),
-      ],
+    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+    children: [
+      _buildButtonColumn(color, Icons.assistant_navigation, 'Visit'),
+      _buildButtonColumn(color, Icons.add_alert_sharp, 'Alarm'),
+      _buildButtonColumn(color, Icons.share, 'Share'),
+    ],
   );
 }
 
