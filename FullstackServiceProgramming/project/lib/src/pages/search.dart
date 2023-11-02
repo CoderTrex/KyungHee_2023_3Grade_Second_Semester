@@ -39,27 +39,24 @@ class _SearchState extends State<Search> {
               Navigator.push(context,
                   MaterialPageRoute(builder: (context) => SearchFocus()));
             },
-            child: Expanded(
-              child: Container(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 8, horizontal: 10),
-                margin: const EdgeInsets.only(left: 10),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(6),
-                  color: const Color(0xffefefef),
-                ),
-                child: Row(
-                  children: const [
-                    Icon(Icons.search),
-                    Text(
-                      '검색',
-                      style: TextStyle(
-                        fontSize: 15,
-                        color: Color(0xff838383),
-                      ),
-                    )
-                  ],
-                ),
+            child: Container(
+              padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 10),
+              margin: const EdgeInsets.only(left: 10),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(6),
+                color: const Color(0xffefefef),
+              ),
+              child: Row(
+                children: const [
+                  Icon(Icons.search),
+                  Text(
+                    '검색',
+                    style: TextStyle(
+                      fontSize: 15,
+                      color: Color(0xff838383),
+                    ),
+                  )
+                ],
               ),
             ),
           ),
