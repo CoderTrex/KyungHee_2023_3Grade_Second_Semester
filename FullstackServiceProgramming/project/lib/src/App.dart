@@ -5,6 +5,7 @@ import 'package:project/src/controller/bottom_nav_controller.dart';
 import 'package:project/src/pages/home.dart';
 import 'package:project/src/pages/search.dart';
 import 'package:project/src/pages/active_history.dart';
+import 'package:project/src/pages/mypage.dart';
 
 // getx 영상을 봐야함
 class App extends GetView<BottomNavcontroller> {
@@ -29,7 +30,7 @@ class App extends GetView<BottomNavcontroller> {
               ),
               Container(),
               const ActiveHistory(),
-              Container(child: Center(child: Text('MYPAGE'))),
+              const MyPage(),
             ],
           ),
           bottomNavigationBar: BottomNavigationBar(

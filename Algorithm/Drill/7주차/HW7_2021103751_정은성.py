@@ -21,9 +21,9 @@ int_MAX = 999999
 # prim’s 알고리즘 구현
 for i in range(0, n-1):
     if (i == 0):
-        for i in range(1,n):
-            nearest[i]=0
-            distance[i]=w[0][i]
+        for k in range(1,n):
+            nearest[k]=0
+            distance[k]=w[0][k]
 
     shortest = int_MAX
     vertex = 0
