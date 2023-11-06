@@ -44,6 +44,7 @@ dependencies:
   firebase_core: ^2.21.0
   firebase_auth: ^4.12.1
   google_sign_in: ^6.1.5
+  cloud_firestore: ^4.12.2
 
 dev_dependencies:
   flutter_test:
@@ -60,6 +61,7 @@ dev_dependencies:
 # following page: https://dart.dev/tools/pub/pubspec
 
 # The following section is specific to Flutter packages.
+
 flutter:
 
   # The following line ensures that the Material Icons font is

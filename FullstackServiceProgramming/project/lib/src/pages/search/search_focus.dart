@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:project/src/components/image_dart.dart';
 import 'package:project/src/controller/bottom_nav_controller.dart';
 

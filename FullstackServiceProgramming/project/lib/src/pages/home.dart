@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:project/src/App.dart';
 import 'package:project/src/components/avatar_widget.dart';
 import 'package:project/src/components/image_dart.dart';
 import 'package:project/src/components/post_widget.dart';
