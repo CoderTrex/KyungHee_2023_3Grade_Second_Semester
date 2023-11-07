@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:project/src/controller/auth_controller.dart';
 import 'package:project/src/models/project_user_.dart';
 
@@ -13,6 +16,10 @@ class SignupPage extends StatefulWidget {
 class _SignupPageState extends State<SignupPage> {
   TextEditingController nicknameController = TextEditingController();
   TextEditingController descriptionController = TextEditingController();
+  final ImagePicker _picker = ImagePicker();
+  XFile? thumbnailXfile;
+
+  void update() => setState(() {});
 
   Widget _avatar() {
     return Column(
@@ -22,18 +29,27 @@ class _SignupPageState extends State<SignupPage> {
           child: SizedBox(
             width: 100,
             height: 100,
-            child: Image.asset(
-              'assets/images/default_image.png',
-              fit: BoxFit.cover,
-            ),
+            child: thumbnailXfile != null
+                ? Image.file(
+                    File(thumbnailXfile!.path),
+                    fit: BoxFit.cover,
+                  )
+                : Image.asset(
+                    'assets/images/default_image.png',
+                    fit: BoxFit.cover,
+                  ),
           ),
         ),
         const SizedBox(
           height: 15,
         ),
         ElevatedButton(
-          onPressed: () {},
-          child: Text('이미지 변경'),
+          onPressed: () async {
+            thumbnailXfile = await _picker.pickImage(
+                source: ImageSource.gallery, imageQuality: 100);
+            update();
+          },
+          child: const Text('이미지 변경'),
         ),
       ],
     );
@@ -107,7 +123,7 @@ class _SignupPageState extends State<SignupPage> {
               nickname: nicknameController.text,
               description: descriptionController.text,
             );
-            AuthController.to.signup(signupUser);
+            AuthController.to.signup(signupUser, thumbnailXfile);
           },
           child: const Text('회원가입'),
         ),
