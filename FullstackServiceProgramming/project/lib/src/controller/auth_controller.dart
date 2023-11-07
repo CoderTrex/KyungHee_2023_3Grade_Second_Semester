@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
@@ -25,12 +24,13 @@ class AuthController extends GetxController {
       var task = UploadXFile(thumbnail,
           '${signupUser.uid}/profile.${thumbnail.path.split('.').last}');
       task.snapshotEvents.listen(
-        (event) {
+        (event) async {
           print(event.bytesTransferred);
           if (event.totalBytes == event.bytesTransferred &&
               event.state == TaskState.success) {
-            var downloadUrl = event.ref.getDownloadURL();
-            var updateUserData = signupUser.copyWith(thumbnail:downloadUrl)
+            var downloadUrl = await event.ref.getDownloadURL();
+            signupUser.thumnail = downloadUrl;
+            // var updateUserData = signupUser.copyWith(thumbnail: downloadUrl);
           }
         },
       );

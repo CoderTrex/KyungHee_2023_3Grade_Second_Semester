@@ -29,4 +29,14 @@ class Puser {
       'description': description,
     };
   }
+
+  Puser copyWith(
+      {String? uid, String? nickname, String? thumnail, String? description}) {
+    return Puser(
+      uid: uid ?? this.uid,
+      nickname: nickname ?? this.nickname,
+      thumnail: thumnail ?? this.thumnail,
+      description: description ?? this.description,
+    );
+  }
 }
