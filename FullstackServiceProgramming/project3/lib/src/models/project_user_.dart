@@ -1,12 +1,18 @@
 class Puser {
-  String? uid;
-  String? nickname;
-  String? thumnail;
-  String? description;
+  String? uid; // user uid
+  String? nickname; // nickname in application
+  String? thumbnail; // User profile image
+  String? description; // One-line user introduction
+
+  // User’s individual subscription list and algorithm
+  final List<Map<dynamic, bool>> subcrible = [];
+  final List<Map<dynamic, int>> interest = [];
+  final List<Map<dynamic, int>> algorithm = [];
+
   Puser({
     this.uid,
     this.nickname,
-    this.thumnail,
+    this.thumbnail,
     this.description,
   });
 
@@ -14,7 +20,7 @@ class Puser {
     return Puser(
       uid: json['uid'] == null ? '' : json['uid'] as String,
       nickname: json['nickname'] == null ? '' : json['nickname'] as String,
-      thumnail: json['thumnail'] == null ? '' : json['thumnail'] as String,
+      thumbnail: json['thumbnail'] == null ? '' : json['thumbnail'] as String,
       description:
           json['description'] == null ? '' : json['description'] as String,
     );
@@ -24,7 +30,7 @@ class Puser {
     return {
       'uid': uid,
       'nickname': nickname,
-      'thumnail': thumnail,
+      'thumbnail': thumbnail,
       'description': description,
     };
   }
@@ -32,13 +38,13 @@ class Puser {
   Puser copyWith({
     String? uid,
     String? nickname,
-    String? thumnail,
+    String? thumbnail,
     String? description,
   }) {
     return Puser(
       uid: uid ?? this.uid,
       nickname: nickname ?? this.nickname,
-      thumnail: thumnail ?? this.thumnail,
+      thumbnail: thumbnail ?? this.thumbnail,
       description: description ?? this.description,
     );
   }
