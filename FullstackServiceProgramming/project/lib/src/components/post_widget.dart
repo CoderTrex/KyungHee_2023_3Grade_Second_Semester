@@ -1,11 +1,15 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:expandable_text/expandable_text.dart';
 import 'package:flutter/material.dart';
+// import 'package:get/get.dart';
 import 'package:project/src/components/avatar_widget.dart';
 import 'package:project/src/components/image_dart.dart';
+import 'package:project/src/models/post.dart';
+import 'package:timeago/timeago.dart' as timeago;
 
 class PostWidget extends StatelessWidget {
-  const PostWidget({super.key});
+  final Post post;
+  const PostWidget({Key? key, required this.post}) : super(key: key);
 
   Widget _header() {
     return Padding(
@@ -15,10 +19,9 @@ class PostWidget extends StatelessWidget {
         children: [
           AvatarWidget(
             type: AvatarType.TYPE3,
-            nickname: 'silvercastle',
+            nickname: post.userInfo!.nickname,
             size: 40,
-            thumbPath:
-                'https://img.hankyung.com/photo/202306/AKR20230630015400005_02_i_P4.jpg',
+            thumbPath: post.userInfo!.thumnail!,
           ),
           GestureDetector(
             onTap: () {},
@@ -36,9 +39,7 @@ class PostWidget extends StatelessWidget {
   }
 
   Widget _image() {
-    return CachedNetworkImage(
-        imageUrl:
-            'https://image.webtoonguide.com/b2/5b/14699fe054e3e4ecc8de4ac4d1f4');
+    return CachedNetworkImage(imageUrl: post.thumbnail!);
   }
 
   Widget _infoCount() {
@@ -80,15 +81,15 @@ class PostWidget extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          const Text(
-            '좋아요 150개',
-            style: TextStyle(
+          Text(
+            '좋아요 ${post.likecount ?? 0}개',
+            style: const TextStyle(
               fontWeight: FontWeight.bold,
             ),
           ),
           ExpandableText(
-            '눈이 온다~\n눈이 온다~\n눈이 온다~\n눈이 온다~\n',
-            prefixText: 'silvercastle',
+            post.description ?? '',
+            prefixText: post.userInfo!.nickname,
             onPrefixTap: () {
               print('세기말 풋사과 보습학원 보러가기~');
             },
@@ -111,7 +112,7 @@ class PostWidget extends StatelessWidget {
       child: const Padding(
         padding: EdgeInsets.symmetric(horizontal: 15.0),
         child: Text(
-          '댓글 30개 모두 보기',
+          '댓글 100개 모두 보기',
           style: TextStyle(color: Colors.grey, fontSize: 13),
         ),
       ),
@@ -119,10 +120,10 @@ class PostWidget extends StatelessWidget {
   }
 
   Widget _dateAgo() {
-    return const Padding(
+    return Padding(
       padding: EdgeInsets.symmetric(horizontal: 15.0),
       child: Text(
-        '1일전',
+        timeago.format(post.createdAt!),
         style: TextStyle(
           color: Colors.grey,
           fontSize: 13,

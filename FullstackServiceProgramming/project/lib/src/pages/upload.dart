@@ -1,16 +1,17 @@
 import 'dart:typed_data';
+// import 'package:project/src/components/image_data.dart';
+
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:photo_manager/photo_manager.dart';
 import 'package:project/src/components/image_dart.dart';
 import 'package:project/src/controller/upload_controller.dart';
+import 'package:get/get.dart';
+import 'package:photo_manager/photo_manager.dart';
 
 class Upload extends GetView<UploadController> {
-  Upload({super.key});
+  Upload({Key? key}) : super(key: key);
 
   Widget _imagePreview() {
-    var width = Get.size.width;
-    // var width = MediaQuery.of(context).size.width;
+    var width = Get.width;
     return Obx(
       () => Container(
         width: width,
@@ -20,7 +21,10 @@ class Upload extends GetView<UploadController> {
           controller.selectedImage.value,
           width.toInt(),
           builder: (data) {
-            return Image.memory(data, fit: BoxFit.cover);
+            return Image.memory(
+              data,
+              fit: BoxFit.cover,
+            );
           },
         ),
       ),
@@ -37,64 +41,58 @@ class Upload extends GetView<UploadController> {
             onTap: () {
               showModalBottomSheet(
                 context: Get.context!,
-                // context: context,
                 shape: const RoundedRectangleBorder(
-                  // borderRadius: BorderRadius.circular(20),
                   borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(20),
-                    topRight: Radius.circular(20),
-                  ),
+                      topLeft: Radius.circular(20),
+                      topRight: Radius.circular(20)),
                 ),
-                isScrollControlled: true,
-
+                isScrollControlled:
+                    controller.albums.length > 10 ? true : false,
                 constraints: BoxConstraints(
-                    maxHeight: MediaQuery.of(Get.context!).size.height -
-                        MediaQuery.of(Get.context!).padding.top * 2),
-                // maxHeight: MediaQuery.of(context).size.height -
-                //     MediaQuery.of(context).padding.top * 2),
+                  maxHeight: MediaQuery.of(Get.context!).size.height -
+                      MediaQuery.of(Get.context!).padding.top,
+                ),
                 builder: (_) => Container(
-                  // height: 200,
+                  height: controller.albums.length > 10
+                      ? Size.infinite.height
+                      : controller.albums.length * 60,
                   child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      Center(
-                        child: Container(
-                          margin: const EdgeInsets.only(top: 7),
-                          decoration: BoxDecoration(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        Center(
+                          child: Container(
+                            margin: const EdgeInsets.only(top: 7),
+                            decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(10),
-                              color: Colors.black54),
-                          width: 40,
-                          height: 4,
+                              color: Colors.black54,
+                            ),
+                            width: 40,
+                            height: 4,
+                          ),
                         ),
-                      ),
-                      Expanded(
-                        child: SingleChildScrollView(
-                          child: Column(
-                            // crossAxisAlignment: CrossAxisAlignment.stretch,
-                            children: List.generate(
-                              controller.albums.length,
-                              (index) => GestureDetector(
-                                onTap: () {
-                                  controller
-                                      .changeAlbum(controller.albums[index]);
-                                },
-                                child: Container(
-                                  padding: const EdgeInsets.symmetric(
-                                      vertical: 15, horizontal: 20),
-                                  child: Text(
-                                    controller.albums[index].name,
-                                    style: const TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 20),
+                        Expanded(
+                          child: SingleChildScrollView(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.stretch,
+                              children: List.generate(
+                                controller.albums.length,
+                                (index) => GestureDetector(
+                                  onTap: () {
+                                    controller
+                                        .changeAlbum(controller.albums[index]);
+                                    Get.back();
+                                  },
+                                  child: Container(
+                                    padding: const EdgeInsets.symmetric(
+                                        vertical: 15, horizontal: 20),
+                                    child: Text(controller.albums[index].name),
                                   ),
                                 ),
                               ),
                             ),
                           ),
-                        ),
-                      ),
-                    ],
-                  ),
+                        )
+                      ]),
                 ),
               );
             },
@@ -111,7 +109,7 @@ class Upload extends GetView<UploadController> {
                       ),
                     ),
                   ),
-                  Icon(Icons.arrow_drop_down),
+                  const Icon(Icons.arrow_drop_down),
                 ],
               ),
             ),
@@ -122,30 +120,27 @@ class Upload extends GetView<UploadController> {
                 padding:
                     const EdgeInsets.symmetric(vertical: 5, horizontal: 10),
                 decoration: BoxDecoration(
-                  color: const Color(0xff808080),
-                  borderRadius: BorderRadius.circular(30),
-                ),
-                child: Row(
+                    color: const Color(0xff808080),
+                    borderRadius: BorderRadius.circular(30)),
+                child: const Row(
                   children: [
-                    ImageData(IconsPath.imageSelectIcon),
-                    const SizedBox(width: 7),
-                    const Text(
+                    // ImageData(IconsPath.imageSelectIcon),
+                    SizedBox(width: 7),
+                    Text(
                       '여러 항목 선택',
                       style: TextStyle(color: Colors.white, fontSize: 14),
-                    )
+                    ),
                   ],
                 ),
               ),
-              const SizedBox(
-                width: 5,
-              ),
+              const SizedBox(width: 5),
               Container(
                 padding: const EdgeInsets.all(6),
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   shape: BoxShape.circle,
-                  color: const Color(0xff808080),
+                  color: Color(0xff808080),
                 ),
-                child: ImageData(IconsPath.cameraIcon),
+                // child: ImageData(IconsPath.cameraIcon),
               )
             ],
           ),
@@ -167,19 +162,17 @@ class Upload extends GetView<UploadController> {
         ),
         itemCount: controller.imageList.length,
         itemBuilder: (BuildContext context, int index) {
-          // imageList[index]
           return _photoWidget(controller.imageList[index], 200,
               builder: (data) {
             return GestureDetector(
                 onTap: () {
                   controller.changeSelectedImage(controller.imageList[index]);
-                  // update();
                 },
                 child: Obx(
                   () => Opacity(
                     opacity: controller.imageList[index] ==
                             controller.selectedImage.value
-                        ? 0.4
+                        ? 0.3
                         : 1,
                     child: Image.memory(
                       data,
@@ -196,7 +189,7 @@ class Upload extends GetView<UploadController> {
   Widget _photoWidget(AssetEntity asset, int size,
       {required Widget Function(Uint8List) builder}) {
     return FutureBuilder(
-      future: asset.thumbnailDataWithSize(const ThumbnailSize(200, 200)),
+      future: asset.thumbnailDataWithSize(ThumbnailSize(size, size)),
       builder: (_, AsyncSnapshot<Uint8List?> snapshot) {
         if (snapshot.hasData) {
           return builder(snapshot.data!);
@@ -210,6 +203,7 @@ class Upload extends GetView<UploadController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
@@ -221,7 +215,7 @@ class Upload extends GetView<UploadController> {
           ),
         ),
         title: const Text(
-          'NEW Post',
+          'New Post',
           style: TextStyle(
             fontWeight: FontWeight.bold,
             fontSize: 20,
@@ -230,7 +224,7 @@ class Upload extends GetView<UploadController> {
         ),
         actions: [
           GestureDetector(
-            onTap: () {},
+            onTap: controller.gotoImageFilter,
             child: Padding(
               padding: const EdgeInsets.all(15.0),
               child: ImageData(IconsPath.nextImage, width: 50),
@@ -239,13 +233,14 @@ class Upload extends GetView<UploadController> {
         ],
       ),
       body: SingleChildScrollView(
-          child: Column(
-        children: [
-          _imagePreview(),
-          _header(),
-          _imageSelectList(),
-        ],
-      )),
+        child: Column(
+          children: [
+            _imagePreview(),
+            _header(),
+            _imageSelectList(),
+          ],
+        ),
+      ),
     );
   }
 }
