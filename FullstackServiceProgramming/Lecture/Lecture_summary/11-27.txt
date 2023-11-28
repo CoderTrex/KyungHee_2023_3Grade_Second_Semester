@@ -1,0 +1,16 @@
+constant variable 구분하고 final 확인하기
+ahead of complier로 생산된 application의 기능확인하기
+hot-reload hot-restart
+
+
+
+jit VS aot
+결론: 시간 -> 컴파일러 때문에 속도가 빨라짐
+
+
+jit 시작시간은 느릴 수 있음
+성능및 디버그가 빠르지 않음
+
+
+aot는 성능을 일관정인 
+빌드 이전에 
