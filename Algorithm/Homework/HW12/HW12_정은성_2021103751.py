@@ -56,8 +56,6 @@ print("노드 개수:", node_count)
 
 
 
-
-
 # 2. 너비 우선 탐색(Breadth-First Search)을 이용한 0/1 Knapsack Problem 해결 함수
 import queue
 
