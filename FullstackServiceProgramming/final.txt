@@ -1,21 +1,79 @@
 [1] Development 과정에서 활용 할 수 있는 Hot-Reload와 Hot-Restart는 무엇이고, 어떤 차이점이 있는지 설명합니다.
 
-
-
 [2] Dart/Flutter의 Toolchain 중 Development 목적의 경우에 사용하는 컴파일러의 유형은 무엇이고, 어떻게 동작 하는지 설명합니다.
-
-
 
 [3] Dart/Flutter의 Toolchain 중 Production 목적의 경우에 사용하는 컴파일러의 유형은 무엇이고, 어떻게 동작 하는지 설명합니다.
 
-
-
 [4] Dart/Flutter의 Toolchain을 Development 목적과 Production 목적으로 나누는 경우, 각각의 경우에 대한 장단점을 비교합니다. 이때 비교 항목은 3가지 정도로 본인이 선택합니다.
-
-
 
 [5] Flutter에는 Skia 및 Impeller와 같은 렌더링 라이브러리가 포함되어 있습니다. Reactive Native와 같은 전통적인 Cross Platform과 비교해서, 프로그램의 동작이 어떻게 다른지 설명합니다.
 
-
-
 [6] Flutter에는 Skia 및 Impeller와 같은 렌더링 라이브러리가 포함되어 있습니다. Reactive Native와 같은 전통적인 Cross Platform과 비교해서, 프로그램을 개발하는 개발자 측면에서 기대할 수 있는 장점을 설명합니다.
+
+[7] gRPC가 RESTful API와 비교해서 가지는 장점을 설명합니다.
+
+[8] gRPC를 사용해서 개발하는 경우, RPC과 RESTful API과 비교해서 개발의 용이성이 우수할 수 있는 서비스 모델을 기술하고, 이유를 설명합니다.
+
+설계에 대한 가이드 -> 경험을 공유한다.
+설계도를 공유한다.
+next-step plug-in-play
+호출 받는 코드 - 안정화된 코드: 해당 코드를 건들지 말고 이것을 기준으로 진행
+sigleton ->  실행하는 객체가 하나
+그에 맞는 일반화된 설계방법에 대해서 활용
+
+adaptee pattern: 
+    호출당하는 자 adapter
+    client는 target을 호출함.
+    interface - virtual function
+    실제로 호출되는 코드는 adapter의 operation() 코드이다.
+    호출하는 화살표 
+
+adaptee pattern(c++만 유효한 방식): 
+    호출당하는 자 adapter
+    client는 target을 호출함.
+    interface - virtual function
+    실제로 호출되는 코드는 adapter의 operation() 코드이다.
+    adaptee가 adapter의 베이스 클래스이다. 
+    부모가 2개인 class이다.
+    mixin함수
+    BUT : base class는 하나만 넣기로 하는것이 강조됨
+
+
+app service 와 web의 패턴이 생기게 됨
+시험문제에 나올 확률이 높음
+
+clean architecture:
+
+레이어가 3개로 나뉨
+presentation layer
+business logick layer
+data Acess
+
+결국 class간의 상관 관계
+state가 바뀌면 보이는 것은 flutter의 역할임
+
+
+mvc 패턴:
+중요
+
+model view controller
+model에서 필요한 것을 가져옴
+application delegate에서 보여줌
+
+java spring framework
+
+apple ios에서 ui kit에서 mvc를 강제함
+표준을 지목한 사례이다.
+
+이후에는 swift UI를 만들어서 해당 모델을 강조함
+    상호 관계를 외워도야함.
+    view와 model을 끊어지지 않고 서로를 단절함.  직접 단절함 
+        -> 이전에도 그렇게 만들려고 했지만, 그렇지 못했기 때문에 해결함.
+    mvc는 연관되어 있기 때문에 -> 개별 팀간의 대화 및 소통이 필요함. -> 단절이 높을 수록 일의 작업이 편함
+
+웹서비스
+
+
+FFI:
+1. 서로 다른 언어로 만들어서 -> 통신을 한다
+2. 기계어 레벨에서 합치자
