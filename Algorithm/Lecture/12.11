@@ -20,7 +20,6 @@ searching은 전체 트리의 개수는 적어도 n개는 되어야함
 n-1번은 최대값구하기 방법
 n-1+log(n)-1 = n+log(n)-2
 
-
 k번째 작은 키 찾기
 1. 단순 정렬 후 탐색: O(nlog(n))
 2. partition 사용 : quick sort 사용
