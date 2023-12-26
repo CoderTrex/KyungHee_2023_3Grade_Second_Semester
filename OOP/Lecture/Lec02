@@ -1,0 +1,27 @@
+------------------------------------------------------------------------------------
+2page:
+
+operand     : 피연산자
+operator    : 연산자
+
+
+전위 연산자
+
+prefix
+int operator++(){
+    this->value+=1
+    return this->vlaue;
+}
+
+postfix
+// 매개변수 int는 구분하기 위한 자료형일 뿐, 실제로 어떤 값을 가지고와 연산을 진행하는 것이 아님 
+int operator++(int ){  
+    int tmp = this.value;
+    this->value += 1
+    return tmp 
+}
+
+
+좌측 연관성과 우측 연관성을 알아야함
+좌측연관성은 계산
+우측연관성은 할당
