@@ -76,7 +76,6 @@ int fourthDigit (int number){
     return digit;
 }
 
-
 int addFourDigits(int num){
     int result = firstDigit(num) + secondDigit(num) 
                 + thirdDigit(num) + fourthDigit(num);
@@ -86,18 +85,22 @@ int addFourDigits(int num){
 int main(){
     int number;
     int result;
+
     while (1){
         std::cin >> number;
+        int _range = number/1000;
         if (number < 0){
             std::cout << "You must enter a positive integer.\n";
             continue;
         }
-        if (number / 10000 >= 1){
+        if (_range >= 1 && _range <= 9){
+            result = addFourDigits(number);
+            std::cout << "addFourtDigit: " <<  result << "\n";
+        }
+        else {
             std::cout << "You must enter a 4-digit number.\n";
             continue;
         }
-        else result = addFourDigits(number);
-        std::cout << "addFourtDigit: " <<  result << "\n";
     }
 }
 

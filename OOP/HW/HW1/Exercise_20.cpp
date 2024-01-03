@@ -5,6 +5,9 @@ int main(){
     int rhombus;
     while (1)
     {
+        std::cout << "속이 빈 마름모를 그리는 프로그램입니다.\n";
+        std::cout << "마름모를 그리기 위한 기준 길이를 입력하세요 <홀수만입력>>>";
+
         std::cin >> rhombus;
         if (rhombus == 0) {
             std::cout << "이용해주셔서 감사합니다.\n";

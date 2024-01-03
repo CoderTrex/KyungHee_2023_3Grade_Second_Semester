@@ -23,7 +23,10 @@ int main(){
                 break;
             }   
         }
-        if (flag){
+        if (randNumber[i] == 1){
+            std::cout << "1 is ?" << "\n";
+        }
+        else if (flag){
             std::cout << randNumber[i] << " is a prime number." << "\n"; 
         }
         else {
