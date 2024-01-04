@@ -45,5 +45,4 @@ int main() {
                 << std::setw(13) << " &grade3 = " << std::setw(15) << &grade3 
                 << std::setw(13) << " pgrade3 = " << std::setw(15) << pgrade3
                 << std::setw(13) << " &pgrade3 = " << std::setw(15) << &grade3;
-
 }

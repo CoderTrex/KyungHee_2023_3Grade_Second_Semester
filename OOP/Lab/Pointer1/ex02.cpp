@@ -1,7 +1,6 @@
 #include <iostream>
 #include <iomanip> 
 #include <math.h>
-
 #define ROW 4
 
 void printMatrix(int inMatrix[][4]){
@@ -28,7 +27,6 @@ void sumMatrix(int AMatrix[][4], int BMatrix[][4]){
     printMatrix(SumMatrix);
 }
 
-
 void multiMatrix(int AMatrix[][4], int BMatrix[][4]){
     int MultiMatrix[4][4];
 
@@ -48,7 +46,40 @@ void multiMatrix(int AMatrix[][4], int BMatrix[][4]){
     printMatrix(MultiMatrix);
 }
 
+void multiMatrix2(int AMatrix[][4], int BMatrix[][4]){
+    int **MultiMatrix = new int *[4];
+    for (int i = 0; i < 4; i++){
+        MultiMatrix[i] = new int[4];
+    }
+    for (int i = 0; i < 4; i++){
+        for (int j = 0; j < 4; j++){
+            MultiMatrix[i][j] = 0;
+        }
+    }
 
+    for (int i = 0; i < 4; i++){
+        for (int j = 0; j < 4; j++){
+            for (int k = 0; k < 4; k++){
+                MultiMatrix[i][j] += AMatrix[i][k] * BMatrix[k][j];
+            } 
+        }
+    }
+
+    for (int i = 0; i < 4; i++){
+        for (int j = 0; j < 4; j++){
+            std::cout << std::setw(5) << MultiMatrix[i][j];
+            if (j!= 3){
+                std::cout << " ";
+            }
+        }
+        std::cout << "\n";
+    }
+
+    for (int i = 0; i < 4; i++){
+        delete [] MultiMatrix[i];
+    }
+    delete [] MultiMatrix;
+}
 
 int main(){
     int matrix[4][4] = {

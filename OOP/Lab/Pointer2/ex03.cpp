@@ -30,6 +30,3 @@ int main() {
     std::cout << "swapRef()   호출 후 : " << x << ", "  << y << std::endl;
     return 0;
 }
-
-
-

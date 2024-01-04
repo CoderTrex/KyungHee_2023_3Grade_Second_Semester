@@ -1,35 +1,34 @@
 #include <iostream>
 using namespace std;
 
-// int main(){
-//     // int a[5] = {2, 4, 6, 8, 22};
-//     // int *p;
+int main(){
+    // int a[5] = {2, 4, 6, 8, 22};
+    // int *p;
 
-//     // p = &a[1];
-//     // std::cout << a[0] << " " << p[-1];
+    // p = &a[1];
+    // std::cout << a[0] << " " << p[-1];
     
 
-//     int a[20];
-//     int * p = &(a[5]);
-//     for(int i=0;i<20;i++)
-//         a[i] = i;
+    int a[20];
+    int * p = &(a[5]);
+    for(int i=0;i<20;i++)
+        a[i] = i;
 
-//     cout << p+5 << endl; //address of a[10]
-//     cout << *(p+5) << endl; //10
-//     cout << *(p++) << endl; //5
-//     cout << *(--p) << endl; //5
-//     int * q = &(a[10]);
-//     cout << *(p + (q-p)/2) << endl; //
-//     return 0;
-// }
+    cout << p+5 << endl; //address of a[10]
+    cout << *(p+5) << endl; //10
+    cout << *(p++) << endl; //5
+    cout << *(--p) << endl; //5
+    int * q = &(a[10]);
+    cout << *(p + (q-p)/2) << endl; //
+    return 0;
+}
 
+// 9page 2는 오타 -임
+// 11page 괄호를 꼭 쳐줘야함. * 연산자의 순서 때문에
 
-// // 9page 2는 오타 -임
-// // 11page 괄호를 꼭 쳐줘야함. * 연산자의 순서 때문에
-
-// 지시연산2번           지시연산1번
-// dim2[i][j]; => 치환 *(p + i*4 + j);
-//                 ex) *(p + 9)
+지시연산2번           지시연산1번
+dim2[i][j]; => 치환 *(p + i*4 + j);
+                ex) *(p + 9)
 
 
 new와 delete는 항상 같이 쓰자.
@@ -62,11 +61,7 @@ for (배열전체)
 delete 배열
 
 
-
-
 // 뒤에는 무조건 상수
-
-
 
 void doIt(int ary[][20]);
 void doThat(int **ary); //wrong -> ary[][] 이랑 같은 뜻임
@@ -76,10 +71,11 @@ int main()
     int a[10][20];
     int (*p)[20] = a;
     doIt(a);
-    // doThat(a); //wrong
     doIt(p);
+    doIt(&(a[0]));
+
+    // doThat(a); //wrong
     // doThat(p); //wrong
-    // doIt(&(a[0]));
     // doThat(&(a[0])); //wrong
 }
 
