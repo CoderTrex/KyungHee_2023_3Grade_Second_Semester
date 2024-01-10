@@ -1,0 +1,87 @@
+this file main language is c++
+
+6, 10, 11, 16, 19, 24
+friend function: 
+
+
+lnline function은 class안에 정의된 함수이다.
+function call은 stack을 사용한다.
+function call은 overhead가 있다.
+inline function은 overhead를 줄이기 위해 사용한다.
+인라인 함수 예시:
+inline int max(int a, int b) { return a > b ? a : b; }
+
+
+10페이지 오타 : class안에 inline function을 정의할때는 inline을 붙이지 않는다.
+
+
+inline function 
+
+
+
+19page: 반환값을 참조형태로 반환.
+= 연산자 오버로딩에서 참조형태로 반환하는 이유는 임시객체를 생성하지 않기 위해서이다.
+다른 연산자 오버로딩에서도 참조형태로 반환해서 전달한다.
+
+
+포인터를 사용하는 assignment operator overloading를 만들때는 
+
+
+
+Example 1:
+Fraction fr1;
+Fraction fr2 = fr1; -> copy constructor
+Fraction fr3(f2); -> copy constructor
+
+Example 2:
+Fraction fr1;
+Fraction fr2;
+fr2 = fr1; -> assignment operator overloading
+
+assignment operator overloading은 copy constructor와 다르게 자동으로 만들어지지 않는다.
+assignment operator overloading을 만들지 않으면 default assignment operator overloading이 만들어진다.
+
+copy constructor가 필요할 때, assignment operator overloading도 필요하다.
+왜냐하면 
+
+
+static function은 시작하자마자 하나의 메모리를 할당받고 프로그램이 끝날때까지 메모리를 유지한다.
+global variable과 같은 개념이다.
+
+
+friend function? : class안에 정의되어 있지만 class의 멤버가 아닌 함수이다.
+friend class? : class안에 정의되어 있지만 class의 멤버가 아닌 class이다.
+
+friend class example:
+class A {
+private:
+    int a;
+public:
+    A(int a) : a(a) {}
+    friend class B;
+};
+
+
+// 나머지는 default constructor로 초기화된다.
+Fraction frArray[10] = { Fraction(1,2), Fraction(1,3), Fraction(1,4) }; 
+
+
+
+Big Endian: 0x12345678 -> 12 34 56 78
+Little Endian: 0x12345678 -> 78 56 34 12
+빅 엔디안은 메모리의 주소가 작은 곳에 상위 바이트가 저장된다. 윈도우는 빅 엔디안이다.
+리틀 엔디안은 메모리의 주소가 작은 곳에 하위 바이트가 저장된다. 리눅스는 리틀 엔디안이다.
+
+
+
+
+enum class Color { RED, BLUE, GREEN };
+x = Color::RED; // ok
+y = 2 // error -> enum class는 int로 변환되지 않는다.
+
+
+enum Color { RED, BLUE = 0, GREEN = 0, YELLOW } // YELLOW = 1이 된다.
+enum {space = '', comma = ',', period = '.'} // space의 아스키코드는 32값이 된다. 나머지도 마찬가지이다.
+
+
+typedef은 기존의 자료형에 새로운 이름을 붙이는 것이다.

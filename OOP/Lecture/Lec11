@@ -72,3 +72,6 @@ annonymous object: 이름이 없는 객체
             Student s("Kim", 20); -> named object
 
 
+소멸자는 객체가 소멸될 때 호출된다.
+무조건 하나만 존재해야 한다.
+소멸자는 매개변수를 가질 수 없다.
