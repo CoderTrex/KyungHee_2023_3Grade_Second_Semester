@@ -1,7 +1,26 @@
 #include <stdio.h>
 
+class Base {
+    public:
+        void print() {
+            printf("Base\n");
+        }
+};
+
+class Derived : public Base {
+    public:
+        void print() {
+            printf("Derived\n");
+        }
+};
+
+
 int main() {
-    printf("Size of int *: %zu bytes\n", sizeof(int *));
-    printf("Size of char *: %zu bytes\n", sizeof(char *));
+    Base b;
+    Derived d;
+
+    // b.print();
+    d.Base::print();
+    d.print();
     return 0;
 }

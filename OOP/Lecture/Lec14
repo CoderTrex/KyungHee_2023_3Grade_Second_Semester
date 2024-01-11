@@ -1,0 +1,102 @@
+title: inheritable and aggregation
+
+base class의 멤버를 상속받는 것을 inheritable이라고 한다.
+dervied class는 base class의 모든 멤버를 상속받는다.
+
+class의 맴버란: data member, function member
+protected: derived class에서만 접근 가능
+private: derived class에서 접근 불가능
+
+
+상속 받을 때는 생성자와 소멸자는 상속받지 않는다.
+생성자와 소멸자는 base class의 것을 사용한다.
+nonmember function은 상속받지 않는다.
+assignment operator는 상속받지 않는다.
+virtual method는 상속 받지 않는다. -> 다형성
+
+13page의 표 알아두기
+예시: 1번 예시의 3번째-> public을 private으로 바꾸면, public으로 선언된 것은 private으로 바뀐다.
+
+protected는 private과 public의 중간 정도의 의미를 가진다.
+protected는 derived class에서 접근 가능하다.
+
+
+19page는 using을 통해서 private으로 선언된 것을 protected로 바꿀 수 있다.
+
+자식 클래스에서 부모 클래스를 
+
+
+derived::derived (parameter) : base(parameter) { // base class가 먼저 생성되고, derived class가 생성된다.
+    //derived class의 생성자
+    //base class의 생성자를 호출하는 것
+}
+
+
+자식 클래스에서 소멸자 호출 후 부모 클래스의 소멸자가 호출된다.
+
+
+오버로딩 : 같은 이름의 함수를 여러개 만드는 것
+    -> 함수 이름이 같음
+    -> 입력리스트가 다름
+    -> 같은 위계를 가짐
+
+오버라이딩 : 부모 클래스의 함수를 자식 클래스에서 재정의하는 것
+    -> 함수 이름이 같음
+    -> 입력리스트가 같음
+    -> virtual이라는 키워드가 있음
+    -> 다른 위계를 가짐 (부모 자식 관계)
+
+
+
+
+void Derived::print() {
+    cout << "Derived" << endl;
+}
+Derived dobj;
+dobj.print(); // Derived::print()만 호출된다.
+dobj.Base::print(); // Base::print()만 호출된다.
+dobj.Derived::print(); // Derived::print()만 호출된다.
+
+
+polymorphism: 다형성
+    -> 같은 이름의 함수가 다른 기능을 하는 것
+    -> 오버라이딩을 통해서 구현한다.
+    -> virtual이라는 키워드를 사용한다.
+    -> 부모 클래스의 포인터를 통해서 자식 클래스의 객체를 가리킬 수 있다.
+
+정적 바인딩 : 컴파일 시간에 결정되는 것
+    함수는 컴파일 타임에 포인터에 바인딩 됨
+
+BaseClass *objptr = new BaseClass();
+objptr->print(); // BaseClass::print()가 호출된다.
+delete objptr;
+objptr = new DerivedClass(); // DerivedClass안에는 BaseClass가 포함되어 있으므로 가능하다. 메모리의 시작점은 base class의 시작점이기 때문에 가능하다. (생성자가 먼저 호출)
+objptr->print(); // BaseClass::print()가 호출된다.
+
+
+동적 바인딩 : 실행 시간에 결정되는 것
+    -> 함수는 실행 시간(런타임)에 객체의 타입에 따라서 바인딩 됨
+    -> virtual 키워드를 사용한다.
+    -> 부모 클래스의 포인터를 통해서 자식 클래스의 객체를 가리킬 수 있다.
+
+BaseClass *objptr = new BaseClass();
+objptr->print(); // BaseClass::print()가 호출된다.
+delete objptr;
+objptr = new DerivedClass(); 
+objptr->print(); // DerivedClass::print()가 호출된다.
+
+
+자식클래스에게 강제로 함수의 오버라이딩을 하도록 유도하는 경우 존재
+    : 그냥 빈 함수를 만들어 놓고, 자식 클래스에서 오버라이딩을 하도록 유도한다.
+        부모 클래스에서 선언됨. 
+        부모 클래스에서는 아무런 기능이 없다.
+        자식에서는 꼭 오버라이딩을 해야한다.
+    
+    -> pure virtual function
+    -> virtual void print() = 0; // = 0을 붙이면 pure virtual function이 된다.
+    -> pure virtual function이 하나라도 있으면, abstract class가 된다.
+
+abstract class: 객체를 만들 수 없는 클래스
+    -> 객체를 만들 수 없다.
+    -> 객체를 만들 수 없는 클래스는 포인터를 통해서만 사용할 수 있다.
+    -> 객체를 만들 수 없는 클래스는 자식 클래스에서 오버라이딩을 통해서만 사용할 수 있다.
