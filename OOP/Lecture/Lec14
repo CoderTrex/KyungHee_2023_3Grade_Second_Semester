@@ -1,12 +1,37 @@
 title: inheritable and aggregation
+basic language: C++
+
+inheritance: 상속
+    -> 기존의 클래스를 확장해서 새로운 클래스를 만드는 것
+    -> 기존의 클래스를 부모 클래스, 확장된 클래스를 자식 클래스라고 한다.
 
 base class의 멤버를 상속받는 것을 inheritable이라고 한다.
-dervied class는 base class의 모든 멤버를 상속받는다.
+dervied class는 base class의 모든 멤버를 상속받는다. (private, protected, public 모두 상속받는다.)
+하지만 private은 derived class에서 접근할 수 없다.
+protected와 public은 derived class에서 접근할 수 있다.
 
 class의 맴버란: data member, function member
-protected: derived class에서만 접근 가능
-private: derived class에서 접근 불가능
 
+private: derived class에서 접근 불가능
+protected: derived class에서만 접근 가능
+public: derived class 및 외부에서 접근 가능
+
+public : 클래스의 멤버 함수에서 접근 가능, 자식 클래스의 멤버 함수에서 접근 가능, 외부에서 접근 가능.
+protected : 클래스의 멤버 함수에서 접근 가능, 자식 클래스의 멤버 함수에서 접근 가능, 외부에서 접근 불가능.
+private : 클래스의 멤버 함수에서 접근 가능, 자식 클래스의 멤버 함수에서 접근 불가능, 외부에서 접근 불가능
+
+base class type  |  inheritance type    |   derived class type
+private         ->  private             ->  inherited but inaccessible
+protected       ->  private             ->  private  
+public          ->  private             ->  private
+
+private         ->  protected           ->  inherited but inaccessible
+protected       ->  protected           ->  protected
+public          ->  protected           ->  protected
+
+private         ->  public              ->  inherited but inaccessible
+protected       ->  public              ->  protected
+public          ->  public              ->  public
 
 상속 받을 때는 생성자와 소멸자는 상속받지 않는다.
 생성자와 소멸자는 base class의 것을 사용한다.
@@ -14,26 +39,15 @@ nonmember function은 상속받지 않는다.
 assignment operator는 상속받지 않는다.
 virtual method는 상속 받지 않는다. -> 다형성
 
-13page의 표 알아두기
-예시: 1번 예시의 3번째-> public을 private으로 바꾸면, public으로 선언된 것은 private으로 바뀐다.
-
-protected는 private과 public의 중간 정도의 의미를 가진다.
-protected는 derived class에서 접근 가능하다.
-
-
 19page는 using을 통해서 private으로 선언된 것을 protected로 바꿀 수 있다.
 
-자식 클래스에서 부모 클래스를 
+자식 클래스에서 소멸자 호출 후 부모 클래스의 소멸자가 호출된다.
 
-
+// 자식 클래스로 만들어진 객체는 이미 부모클래스의 부분을 가지고 있어 문제가 되지 않는다.
 derived::derived (parameter) : base(parameter) { // base class가 먼저 생성되고, derived class가 생성된다.
     //derived class의 생성자
     //base class의 생성자를 호출하는 것
 }
-
-
-자식 클래스에서 소멸자 호출 후 부모 클래스의 소멸자가 호출된다.
-
 
 오버로딩 : 같은 이름의 함수를 여러개 만드는 것
     -> 함수 이름이 같음
@@ -46,9 +60,6 @@ derived::derived (parameter) : base(parameter) { // base class가 먼저 생성�
     -> virtual이라는 키워드가 있음
     -> 다른 위계를 가짐 (부모 자식 관계)
 
-
-
-
 void Derived::print() {
     cout << "Derived" << endl;
 }
@@ -58,6 +69,10 @@ dobj.Base::print(); // Base::print()만 호출된다.
 dobj.Derived::print(); // Derived::print()만 호출된다.
 
 
+
+
+
+
 polymorphism: 다형성
     -> 같은 이름의 함수가 다른 기능을 하는 것
     -> 오버라이딩을 통해서 구현한다.
@@ -65,33 +80,120 @@ polymorphism: 다형성
     -> 부모 클래스의 포인터를 통해서 자식 클래스의 객체를 가리킬 수 있다.
 
 정적 바인딩 : 컴파일 시간에 결정되는 것
-    함수는 컴파일 타임에 포인터에 바인딩 됨
+    -> 함수는 컴파일 타임에 포인터에 바인딩 됨
+    -> 비록 객체가 new 연산자로 동적할당을 받더라도 상관 없음.
 
-BaseClass *objptr = new BaseClass();
-objptr->print(); // BaseClass::print()가 호출된다.
-delete objptr;
-objptr = new DerivedClass(); // DerivedClass안에는 BaseClass가 포함되어 있으므로 가능하다. 메모리의 시작점은 base class의 시작점이기 때문에 가능하다. (생성자가 먼저 호출)
-objptr->print(); // BaseClass::print()가 호출된다.
 
+// 정적 바인딩
+#include <iostream>
+using namespace std;
+
+class BaseClass {
+public:
+    void print() {
+        cout << "BaseClass" << endl;
+    }
+};
+
+class DerivedClass : public BaseClass {
+public:
+    void print() {
+        cout << "DerivedClass" << endl;
+    }
+};
+
+
+/*Result
+BaseClass
+BaseClass
+*/
+int main() {
+
+    BaseClass *objptr = new BaseClass();
+    objptr->print(); // BaseClass::print()가 호출된다.
+    delete objptr;
+
+    // DerivedClass안에는 BaseClass가 포함되어 있으므로 가능하다. 
+    // 메모리의 시작점은 base class의 시작점이기 때문에 가능하다. (생성자가 먼저 호출)
+    objptr = new DerivedClass(); 
+    objptr->print(); // BaseClass::print()가 호출된다.
+    delete objptr;
+    return 0;
+}
 
 동적 바인딩 : 실행 시간에 결정되는 것
     -> 함수는 실행 시간(런타임)에 객체의 타입에 따라서 바인딩 됨
     -> virtual 키워드를 사용한다.
     -> 부모 클래스의 포인터를 통해서 자식 클래스의 객체를 가리킬 수 있다.
 
-BaseClass *objptr = new BaseClass();
-objptr->print(); // BaseClass::print()가 호출된다.
-delete objptr;
-objptr = new DerivedClass(); 
-objptr->print(); // DerivedClass::print()가 호출된다.
+
+#include <iostream>
+using namespace std;
+
+class BaseClass {
+public:
+    virtual void print() {
+        cout << "BaseClass" << endl;
+    }
+};
+
+class DerivedClass : public BaseClass {
+public:
+    virtual void print() {
+        cout << "DerivedClass" << endl;
+    }
+};
+
+/*Result
+BaseClass
+DerivedClass
+*/
+
+int main( ) {
+    BaseClass *objptr = new BaseClass();
+    objptr->print(); // BaseClass::print()가 호출된다.
+    delete objptr;
+    objptr = new DerivedClass(); 
+    objptr->print(); // DerivedClass::print()가 호출된다.
+}
 
 
-자식클래스에게 강제로 함수의 오버라이딩을 하도록 유도하는 경우 존재
+
+
+
+
+
+
+기본적으로 가상함수는 오버라이딩을 강제하지 않는다.
+하지만 자식클래스에게 강제로 함수의 오버라이딩을 하도록 유도하는 경우 존재
     : 그냥 빈 함수를 만들어 놓고, 자식 클래스에서 오버라이딩을 하도록 유도한다.
         부모 클래스에서 선언됨. 
         부모 클래스에서는 아무런 기능이 없다.
         자식에서는 꼭 오버라이딩을 해야한다.
-    
+
+class Polygons {
+protected:
+    double area;
+    double perimeter;
+    virtual void calc_area() = 0;
+    virtual void calc_perimeter() = 0;
+public:
+    void printArea();
+    void printPerimeter();
+}
+
+class Rectangle : public Polygons {
+private:
+    double sideA;
+    double sideB;
+    double sideC;
+
+    virtual void calc_area();
+    virtual void calc_perimeter();
+public:
+    Rectangle(double a, double b, double c);
+}
+
     -> pure virtual function
     -> virtual void print() = 0; // = 0을 붙이면 pure virtual function이 된다.
     -> pure virtual function이 하나라도 있으면, abstract class가 된다.
@@ -100,3 +202,48 @@ abstract class: 객체를 만들 수 없는 클래스
     -> 객체를 만들 수 없다.
     -> 객체를 만들 수 없는 클래스는 포인터를 통해서만 사용할 수 있다.
     -> 객체를 만들 수 없는 클래스는 자식 클래스에서 오버라이딩을 통해서만 사용할 수 있다.
+
+Lecture : casting
+based languages: c++
+
+casting은 명시적 방식으로만 가능 묵시적으로는 불가능
+up casting : 자식 -> 부모   (가능)
+down casting : 부모 -> 자식 (불허)
+
+implicit casting (묵시적): baseObj = derObj;        // up casting (가능)
+explicit casting (명시적): baseObj = static_cast<base>derObj;  // up casting (가능)
+
+포인터는 묵시적인 형변환이 안됨.
+
+
+
+동적 casting: 프로그램이 실행중에 캐스팅할 타입을 결정
+baseClass* baseObj = new derClass;
+derClass* derObj = dynamic_cast<derClass*>(baseObj); // down casting (가능)
+성공하면 되는 주소를 반환하고, 안되면 null을 반환한다.
+
+
+BaseClass *baseObj = new BaseClass;
+DerClass *derObj = dynamic_cast<DerClass*>(baseObj); // down casting (불가능)
+
+
+다중 상속 가능
+
+
+57page: 파랑색은 abstract class로 구현되어 있음
+
+class Student {
+private:
+    Date dob;
+public
+    Student();
+};
+
+class Student::Student() : dob(1,1,1990) { } // student 생성시 dob가 생김.
+
+
+// 추가
+
+baseclass를 dervied class로 상속 받고 이후에
+derived class는 생성자 리스트를 통해 
+baseclass의 생성자를 먼저 호출하고 그 이후에 자신의 생성자를 호출한다.

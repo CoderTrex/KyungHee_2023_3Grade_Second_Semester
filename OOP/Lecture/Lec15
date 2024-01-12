@@ -1,0 +1,45 @@
+// lecture: template
+// base lang: C++
+
+
+
+// 함수 템플릿이 동작하지 않을 때, 해당 케이스를 처리하는 특수화 함수를 만들어야 한다.
+// -> but 비효율적이다.
+
+// 11page에서는 return문장에 > 만 오버로딩하면 된다.
+
+template은 한 파일 안에 다 구현하는 것이 좋다. -> 헤더파일에 들어가는게 맞음
+왜냐하면 동적으로 링크되기 때문에, 헤더파일에 들어가면 컴파일러가 알아서 링크해준다.
+
+
+// #include <iostream>
+// using namespace std;
+
+
+// void changechar(char& c) {
+//     c = 'a';
+// }
+
+// int main() {
+//     char c[20];
+
+//     changechar(*c);
+//     std::cout << c[0] << std::endl;
+// }
+
+
+class baseClass {
+    template <typename T>
+    void func(T& t) {
+        t = 0;
+    }
+};
+
+class derivedClass : public baseClass {
+    template <typename T>
+    void func(T& t) {
+        t = 1;
+    }
+};
+
+상위 클래스에서 템플릿을 사용했다면, 하위 클래스에서도 템플릿을 사용해야 한다.

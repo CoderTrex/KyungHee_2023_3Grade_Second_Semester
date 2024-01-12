@@ -28,7 +28,7 @@ public:
     }
 
     void print() {
-        std::cout << "Os_name: " << this->Os_name[20] << std::endl;
+        std::cout << "Os_name: " << this->Os_name << std::endl;
         std::cout << "Memory_size: " << this->memory_size << "GBtye" << std::endl;
     }
 };
@@ -72,7 +72,7 @@ void getPhone(char strName[], int& nMemSize) {
 
     // 2. 스마트폰의 OS 이름과 메모리의 크기를 입력받아 입력받은 매개변수에 저장
     std::cout << "Enter the OS name of the phone: ";
-    std::cin.getline(strName, 20);
+    std::cin >> strName;
     std::cout << "Enter the memory size of the phone: ";
     std::cin >> nMemSize;
 }
