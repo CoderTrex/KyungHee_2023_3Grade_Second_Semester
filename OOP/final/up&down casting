@@ -1,0 +1,27 @@
+upcasting : 자식 클래스를 부모 클래스로 캐스팅
+baseobj = derobj; // upcasting implicit
+baseobj = static_cast<Base>(derobj); // upcasting explicit
+
+downcasting : 부모 클래스를 자식 클래스로 캐스팅
+객체의 다운캐스팅은 C++에서는 명시적으로 혀용하지 않는다.
+하지만 동적 캐스팅의 경우 사용할 수 있다.
+동적 캐스팅이란, 프로그램이 실행되는 중에 캐스팅할 타입을 결정하는 것.
+
+동적 캐스팅은 다형화된 클래스만 가능함 -> 가상함수가 존재해야함.
+derobj = dynamic_cast<Der&>(baseobj); // downcasting explicit
+
+
+multiple inheritance : 다중 상속
+
+derived
+|-----------------
+|                |
+baseOne       baseTwo
+
+
+Aggregation : 집합
+has-a 관계
+객체가 객체를 포함하는 관계
+
+기존의 is-a 관계의 화살표는 내부가 비어있는 화살표이다.
+has-a 관계의 화살표는 내부가 채워진 다이아몬드이다.

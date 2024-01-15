@@ -5,7 +5,7 @@ class Fraction {
 private:
     int m_numerator;
     int m_denominator;
-    int nSubCount;          // sub() 호출시 1씩 감소
+    int nSubCount = 0;          // sub() 호출시 1씩 감소
     static int nAddCount;   // add() 호출시 1씩 증가
 
 public:
@@ -43,7 +43,7 @@ void Fraction::add(const Fraction& fr) {
 void Fraction::sub(const Fraction& fr) {
     this->m_numerator = this->m_numerator * fr.m_denominator - fr.m_numerator * this->m_denominator;
     this->m_denominator = this->m_denominator * fr.m_denominator;
-    nSubCount++;
+    nSubCount--;
 }
 
 void Fraction::print_Sub() {
@@ -55,8 +55,8 @@ void Fraction::printStatic_Add() {
 }
 
 void Fraction::printStatic_Sub() {
-    std::cout << "아래 코드는 컴파일 오류를 발생시킨다." << std::endl;
-    std::cout << "static 멤버 함수는 static 멤버 변수만 접근할 수 있다." << std::endl;
+    std::cout << "아래 코드는 컴파일 오류를 발생시킨다. 이유는 아래에..." << std::endl;
+    std::endl(std::cout);
     // std::cout << "nSubCount: " << nSubCount << std::endl;
 
 }
@@ -77,6 +77,9 @@ int main() {
     Fraction::printStatic_Add();    // 호출- 이름공간을 활용한 정적 멤버 함수 호출
     std::cout << std::endl;
 
+    // std::cout << "객체 f2 nAddCount     : ";
+    // fr2.printStatic_Add();          // 호출- 객체 fr2를 이용한 정적 멤버 함수 호출 
+    // std::cout << std::endl;         // 출력값: 2
 
 
     // 특정 값이 안나오는 이유는 초기화를 안한 값을 연산했기 때문에 이상한 값이 나온다.
@@ -86,11 +89,16 @@ int main() {
     
     // static 멤버 함수는 static 멤버 변수만 접근할 수 있다.
     fr2.printStatic_Sub(); // 호출- 컴파일 오류의 이유를 쓰시오 
+
+
+    std::cout << "정리: static value인 nAddCount는 모든 객체들이 공유하는 변수이다." << std::endl;
+    std::cout << "      static value인 nSubCount는 단순한 int 변수로 객체들이 공유하지 않는다." << std::endl;
+    std::cout << "      때문에 nSubCount는 객체마다 고유한 값이므로 fr2가 호출된 횟수인 1번에 의해 초기화된 0보다 1 작은 값인 -1이 출력된다. " << std::endl;
+    std::cout << "      또한 static 변수는 초기화를 따로 지정하지 않으면 0이된다. 하지만 일반변수는 지정하지 않으면 임의의 쓰레기 값이 들어가는 차이점도 있다." << std::endl;
+    std::cout << "      fr2.print_Sub()의 에러는 static 맴버 함수인 print_Sub()함수가 static 맴버가 아닌 변수에 대해서 접근하기 때문에 에러가 난다." << std::endl;
+    std::cout << "      static 맴버 함수는 static 맴버 변수만 접근할 수 있다." << std::endl;
     return 0;
 }
-
-
-
 
 Fraction Fraction::operator=(const Fraction& fr) {
     this->m_numerator = fr.m_numerator;

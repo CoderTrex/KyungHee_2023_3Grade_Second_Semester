@@ -1,6 +1,5 @@
 this file main language is c++
 
-6, 10, 11, 16, 19, 24
 friend function: 
 
 
@@ -23,10 +22,7 @@ inline function
 = 연산자 오버로딩에서 참조형태로 반환하는 이유는 임시객체를 생성하지 않기 위해서이다.
 다른 연산자 오버로딩에서도 참조형태로 반환해서 전달한다.
 
-
 포인터를 사용하는 assignment operator overloading를 만들때는 
-
-
 
 Example 1:
 Fraction fr1;

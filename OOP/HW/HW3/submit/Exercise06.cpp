@@ -14,6 +14,16 @@ public:
         this->memory_size = 0;
     }
 
+    SmartPhone(char Os_name[]) {
+        strcpy(this->Os_name, Os_name);
+        this->memory_size = 0;
+    }
+
+    SmartPhone(int memory_size) {
+        strcpy(this->Os_name, "");
+        this->memory_size = memory_size;
+    }
+
     SmartPhone(char Os_name[], int memory_size) {
         strcpy(this->Os_name, Os_name);
         this->memory_size = memory_size;
@@ -46,12 +56,10 @@ int main () {
     TomPhone.print();
     /*             */
     
-    
     // 기본생성자를 통해 MyPhone을 선언
     SmartPhone MyPhone;
     MyPhone.print();
     /*             */
-    
 
     // 스마트폰의 OS 이름과 메모리의 크기를 사용자로부터 입력
     getPhone(strName, nMemorySize);
