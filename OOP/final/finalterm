@@ -1,6 +1,5 @@
 Lecture Base language: C++
 
-
 객체지향
 장점:
     1. 객체는 다양한 문제들에 대해 강력하고 자연스러운 접근이 가능하게 함.
@@ -13,6 +12,12 @@ Lecture Base language: C++
         -> 객체의 구현은 문법적으로 복잡할 수 있음
     2. 객체지향 프로그램은 효울성이 좋지 않음 (메모리, 수행시간)
         -> C++는 느리기로 유명했음(지금은 개선됨), JAVA는 느림
+
+객체의 사용이유
+사람들은 객체의 사용방법에 대해서만 관심을 가짐.
+BUT 내부 부품과 동작에 관심을 가짐.
+-> 속성을 숨기고, 쉽게 이용할 수 있는 부분만 보여주자.
+Data Hiding & Encapsulation
 
 private: Hidden data and actions
 public: Simplified actions to access hidden data and actions
@@ -31,7 +36,6 @@ public      : 어디서든 접근이 가능하다.
 struct는 기본적으로 public
 class는 기본적으로 private
 
-
 this 포인터: 선언된 객체의 주소를 가지는 상수 포인터
     -> 객체가 생성될 때 객체의 시작 수조를 가지는 상수 포인터가 자동으로 생성되며,
     이를 통해서 자기 자신의 멤버 변수 및 함수에 접근이 가능하다.
@@ -49,9 +53,8 @@ Fraction::Fraction(int num = 0, int count = 0)
 
 Desctructor: 객체가 소멸될 때 생성되며, 반환값이 없음.
 
-Manager function : 객체를 생성하고 소멸시키는 역할
-mutator function : 객체의 내부 변수를 변경하는 함수
-
+Manager function  : 객체를 생성하고 소멸시키는 역할
+mutator function  : 객체의 내부 변수를 변경하는 함수
 accessor function : 객체의 내부 변수를 반환하는 함수 
     accessor function은 const로 선언하는 것이 좋다. -> 값의 변경이 목적이 아니기 때문에
     예시: int getAge() const {return age;}
@@ -73,40 +76,49 @@ copy constructor: 객체를 복사하는 생성자
                 하지만 객체의 주소를 복사하면 메모리를 절약할 수 있다.
     &로 받는 것은 c++이 완벽한 객체지향 언어가 아니라는 것을 보여준다.
 
+UML: unified Modeling language:
+프로그래머 사이에서 클래스를 나타내기 위한 일종의 규칙
+- : private
+# : protected
++ : public
+
+Friend Function: 
+    특정 class에 대해서 friend 옵션을 적용하여, private 변수에 대해서 접근이 가능하게 한다.
+    두개 이상의 객체가 서로 소통하고 싶을 때 유용함.
+
+[inline 함수]:
+- 암시적 inline함수 선언:
+    클래스 "내부"에 함수를 정의하면, 자동으로 inline함수가 된다.
+    해당 함수는 inline 접두어를 붙이지 않고 정의
+
+- 명시적 inline함수 선언:
+    inline 접두어를 붙여서 정의
+
+인라인 함수의 단점:
+    - 자주, 많이 호출되면 프로그램의 binary의 크기가 커짐
+    - 재귀함수 안됨.
+    - 캐쉬 미스
+    - 컴파일 오버해드 발생
+    - 3~8줄 정도의 함수에 적합
+
 bitwise copy and logical copy
     - bitwise copy: copy하는 객체와 같은 메모리를 가리킴
     - logical copy: copy하는 객체와 다른 메모리를 가리킴
-
-inline 함수:
-    암시적 inline함수 선언
-    클래스 내부에 함수를 정의하면, 자동으로 inline함수가 된다.
-    해당 함수는 inline 접두어를 붙이지 않고 정의
-
-    명시적 inline함수 선언
-    inline 접두어를 붙여서 정의
-
-    인라인 함수의 단점:
-    자주, 많이 호출되면 프로그래므이 binary의 크기가 커짐
-    재귀함수 안됨.
-    캐쉬 미스
-    컴파일 오버해드 발생
-    3~8줄 정도의 함수에 적합
-
 
 복사 생성자 vs 복사 대입 연산자
 복사 생성자 :   생성시기 때 같은 타입을 인자로 넣음.
                 생성시기 때 같은 타입을 대입 연산함.
 
-복사 대입 연산자: 일반 상황에서 대입 연산함.
+복사 생성자: 일반 상황에서 대입 연산함.
 예시)
-Fraction fr1;
-Fraction fr2;
-fr2 = fr1; -> assignment operator
-
 Fraction fr1;
 Fraction fr2 = fr1; -> copy constructor
 Fraction fr3(fr1);  -> copy constructor
 
+삽입 연산자:
+Fraction fr1;
+Fraction fr2;
+fr2 = fr1; -> assignment operator
 
 오버로딩: 두 개 이상의 함수나 연산자를 같은 식별자와 양식으로 재정의 하는 행위
         함수오버로딩: 매개 변수의 개수나 자료형이 다른 함수를 여러 개 정의함.
@@ -115,7 +127,6 @@ Fraction fr3(fr1);  -> copy constructor
 표존 타입의 데이터를 객체 타입으로!
 -> 생성자를 이용한 묵시적형 반환
 -> 묵시적 형변환을 피하기 위해서 C++에서는 명시적 생성자 변환을 사용
-
 
 연산자 오버로딩이 금지된 연산자:
 . :: .* ?: sizeof
@@ -127,12 +138,12 @@ Fraction fr3(fr1);  -> copy constructor
 Fraction frArray[10] = { Fraction(1,2), Fraction(1,3), Fraction(1,4) };
 
 overloading casting operator
-    생성자를 통한 묵시적 형 변환
-예시)
-
+    생성자를 통한 묵시적형 변환
+예시:
 Fraction::operator float() const {
     return (float)numerator / denominator;
 }
+
 Fraction fr1(1,2);
 std::cout << (float)fr1 << std::endl;
 
@@ -142,13 +153,113 @@ Little Endian: 0x12345678 -> 78 56 34 12
 리틀 엔디안은 메모리의 주소가 작은 곳에 하위 바이트가 저장된다. 리눅스는 리틀 엔디안이다.
 
 enum class Color { RED, BLUE, GREEN };
-x = Color::RED; // ok
-y = 2 // error -> enum class는 int로 변환되지 않는다.
+x = Color::RED;     // ok
+y = 2               // error -> enum class는 int로 변환되지 않는다.
 
 enum Color { RED, BLUE = 0, GREEN = 0, YELLOW } // YELLOW = 1이 된다.
 enum {space = '', comma = ',', period = '.'} // space의 아스키코드는 32값이 된다. 나머지도 마찬가지이다.
 
 typedef은 기존의 자료형에 새로운 이름을 붙이는 것이다.
 
+다형성(Polymorphism)은 객체지향 프로그래밍의 중요한 특성 중 하나로, 동일한 인터페이스를 통해 여러 가지 형태의 객체를 다룰 수 있는 능력을 나타냅니다. 
+다형성은 코드의 재사용성을 높이고 유연성을 제공하여 소프트웨어의 확장성을 향상시킵니다. 주로 두 가지 유형의 다형성이 있습니다.
 
+컴파일 타임 다형성 (Compile-time Polymorphism):
 
+컴파일 타임 다형성은 오버로딩(Overloading)을 통해 이루어집니다.
+같은 이름의 함수 또는 연산자가 여러 번 정의되어 다양한 매개변수 형식이나 개수를 처리할 수 있도록 합니다.
+컴파일러는 함수 호출 시에 적절한 버전을 선택하여 컴파일 시점에 해결합니다.
+
+- Copy code -
+int add(int a, int b) {
+    return a + b;
+}
+
+double add(double a, double b) {
+    return a + b;
+}
+
+런타임 다형성 (Runtime Polymorphism):
+런타임 다형성은 오버라이딩(Overriding) 및 가상 함수를 통해 이루어집니다.
+상위 클래스에서 정의된 가상 함수를 하위 클래스에서 재정의하여 동일한 인터페이스를 유지하면서 다양한 동작을 수행할 수 있도록 합니다.
+동적 바인딩을 통해 객체의 실제 타입에 따라 실행 시점에 적절한 함수가 호출됩니다.
+
+- Copy code -
+class Shape {
+public:
+    virtual void draw() {
+        // 기본 도형 그리기
+    }
+};
+
+class Circle : public Shape {
+public:
+    void draw() override {
+        // 원 그리기
+    }
+};
+
+class Square : public Shape {
+public:
+    void draw() override {
+        // 정사각형 그리기
+    }
+};
+
+동적할당과 정적할당은 다음과 같은 차이점을 보인다.
+정적할당은 컴파일 타임에 메모리를 할당하여 결정한다. 일반 함수나 일반 변수가 다음과 같은 방식으로 생성된다.
+동적할당은 런타임에 메모리를 할당한다. 가상함수나 변수의 동적할당에 의해 할당된다.
+
+정적할당:
+장점은 컴파일시 정보가 결정되기 때문에 속도가 빠르며, 에러를 초기에 발견할 수 있어서 안정적이다.
+단점은 컴파일 이후에 변경이 불가능하다.
+
+동적할당:
+장점은 동적할당은 자유롭게 할당할 수 있어 적응성이 높다. 
+또한 포인터에 상관없이 실제 클래스 형에 따라 재정의된 함수 호출이 가능하다.
+미리 메모리 공간을 할당하고 있어서 메모리 낭비가 발생될 수 잇다. 또한 상대적으로 느리다.
+
+다형성을 사용하면 동일한 인터페이스를 갖는 객체들을 일관된 방식으로 다룰 수 있으므로 코드의 가독성이 향상되고, 유지 보수가 쉬워집니다. 
+객체지향 설계 원칙 중 하나인 "프로그램을 인터페이스에 맞춰서, 구현에 맞추지 말라"를 구현하는 데에 기여합니다.
+
+가상함수는 오버라이딩을 강제하지 않음, 하지만 순수 가상함수는 오버라이딩을 강제함.
+
+추상화 클래스는 최소 하나의 순수 가상 함수를 포함해야 한다.
+
+다중 상속은 아래와 같은 방식으로 [접근제어지시자 + 기초 클래스 이름] 형식의 값이 계속해서 사용함으로 사용할 수 있다.
+문제점
+1. 상속 받는 여러 기초 클래스에 같은 이름의 맴버가 존재할 경우
+2. 하나의 클래스를 간접적으로 두 번이상 상속 받을 가능성도 존재함.
+3. 가상 클래스가 아닌 기초 클래스를 다중 상속하면, 기초 클래스 타입의 포인터로 파생 클래스를 가리킬 수 없다
+
+upcasting: 자식 클래스를 부모 클래스로 캐스팅
+
+downcasting: 부모 클래스를 자식 클래스로 캐스팅
+
+upcasting : 자식 클래스를 부모 클래스로 캐스팅
+baseobj = derobj;                       // upcasting implicit
+baseobj = static_cast<Base>(derobj);    // upcasting explicit
+
+downcasting : 부모 클래스를 자식 클래스로 캐스팅
+객체의 다운캐스팅은 C++에서는 명시적으로 혀용하지 않는다.
+하지만 동적 캐스팅의 경우 사용할 수 있다.
+동적 캐스팅이란, 프로그램이 실행되는 중에 캐스팅할 타입을 결정하는 것.
+
+동적 캐스팅은 다형화된 클래스만 가능함 -> 가상함수가 존재해야함.
+derobj = dynamic_cast<Der&>(baseobj);   // downcasting explicit
+
+multiple inheritance : 다중 상속
+
+_________
+|derived|
+|
+|-----------------
+|                |
+baseOne       baseTwo
+
+Aggregation : 집합
+has-a 관계
+객체가 객체를 포함하는 관계
+
+기존의 is-a 관계의 화살표는 내부가 비어있는 화살표이다.
+has-a 관계의 화살표는 내부가 채워진 다이아몬드이다.

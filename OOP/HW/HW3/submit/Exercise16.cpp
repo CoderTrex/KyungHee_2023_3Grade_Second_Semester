@@ -79,6 +79,7 @@ derived2::~derived2() {
     // std::cout << "derived2 destructor" << std::endl;
 }
 
+// initialize 함수를 통해서 맴버 변수를 초기화 할 수 있다.
 void derived2::initialize(int x, int y, int z) {
     derived1::initialize(x, y);
     this->z = z;

@@ -18,6 +18,13 @@ public:
         this->m_denominator = fr.m_denominator;
         return *this;
     }
+
+
+    // 전위와 후위 연산자 오버로딩에서는 매개변수로 둘을 구분한다.
+    // 전위 증가 연산자는 매개변수를 받지 않는다.
+    // 후위 증가 연산자는 매개변수를 받는다.
+    // -> 이들의 차이를 구분하기 위한 매개변수 int는 단순히 둘을 구분하기 위해서 사용될 뿐, 특별한 역할은 하지 않는다.
+
     // 전위 증가 연산자
     Fraction operator++(void) {
         this->m_numerator += this->m_denominator;
@@ -29,12 +36,12 @@ public:
         this->m_numerator += this->m_denominator;
         return temp;
     }
+
     Fraction operator+=(const Fraction& fr) {
         this->m_numerator = this->m_numerator * fr.m_denominator + fr.m_numerator * this->m_denominator;
         this->m_denominator = this->m_denominator * fr.m_denominator;
         return *this; // 포인터로 반환하는 이유는 객체 자체를 반환하기 위해서
     }
-
 
     Fraction operator+(const Fraction& fr) {
         Fraction temp;
